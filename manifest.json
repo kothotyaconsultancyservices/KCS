@@ -1,0 +1,23 @@
+{
+  "name": "Kothotya Consultancy Services (KCS)",
+  "short_name": "KCS Advisory",
+  "description": "Government Registered Enterprise delivering precision software development, cloud infrastructure, regulatory taxation, and corporate governance consultancy.",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#040807",
+  "theme_color": "#061510",
+  "icons": [
+    {
+      "src": "assets/logo-emblem.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/logo-emblem.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ]
+}

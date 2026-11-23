@@ -1,0 +1,1481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kothotya Consultancy Services (KCS) | Multi-Disciplinary Consulting & Technology Firm</title>
+  
+  <!-- SEO & Social Meta -->
+  <meta name="description" content="Kothotya Consultancy Services (KCS) is a premier Government-registered multi-disciplinary firm in Jaipur, Rajasthan, delivering bespoke software engineering, cloud architecture, regulatory taxation, GST advisory, and corporate governance.">
+  <meta name="keywords" content="Kothotya Consultancy Services, KCS, Abhishek Sharma, IT Consultancy Jaipur, Software Development, Tax Consultancy, GST Registration, Management Consulting, MSME Micro Enterprise">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Kothotya Consultancy Services">
+  <meta property="og:title" content="Kothotya Consultancy Services (KCS) | Luxury Aesthetic & Precision Consultancy">
+  <meta property="og:description" content="Government Registered Enterprise led by Abhishek Sharma. Specializing in Software Engineering, Cloud Systems, Tax & GST Auditing, Corporate Law, and 32+ NIC Industry Sectors.">
+  <meta property="og:image" content="assets/logo-emblem.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Kothotya Consultancy Services (KCS)">
+  <meta name="twitter:description" content="Government-registered multi-disciplinary advisory firm delivering precision software development, tax compliance, and corporate management consultancy.">
+  <meta name="twitter:image" content="assets/logo-emblem.jpg">
+  <meta name="theme-color" content="#061510">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <!-- PWA Web Manifest & Favicon -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/jpeg" href="assets/logo-emblem.jpg">
+  <link rel="apple-touch-icon" href="assets/logo-emblem.jpg">
+
+  <!-- Google Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Kothotya Consultancy Services",
+    "alternateName": "KCS Advisory",
+    "legalName": "Kothotya Consultancy Services",
+    "image": "assets/logo-emblem.jpg",
+    "telephone": "+918764041596",
+    "email": "kothotya.consultancy.services@gmail.com",
+    "priceRange": "₹₹₹",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Kothotya Market Building, Kunthada Road, Kanota",
+      "addressLocality": "Jaipur",
+      "addressRegion": "Rajasthan",
+      "postalCode": "303012",
+      "addressCountry": "IN"
+    },
+    "founder": {
+      "@type": "Person",
+      "name": "Abhishek Sharma",
+      "jobTitle": "Proprietor & Principal Consultant"
+    },
+    "taxID": "08PNQPS3095P1ZF",
+    "identifier": "UDYAM-RJ-17-0625867"
+  }
+  </script>
+
+  <!-- Google Fonts: Cinzel & Plus Jakarta Sans & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Phosphor Icons for ultra-crisp modern luxury UI -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ===================================================================
+       ROYAL PRELOADER INTRO SCREEN
+       =================================================================== -->
+  <div id="preloader" class="preloader-overlay">
+    <div class="preloader-content">
+      <!-- Rotating Geometric Rings & Central KCS Emblem -->
+      <div class="preloader-rings-wrap">
+        <div class="preloader-ring ring-outer"></div>
+        <div class="preloader-ring ring-middle"></div>
+        <div class="preloader-ring ring-inner"></div>
+        
+        <div class="preloader-emblem">
+          <img src="assets/logo-emblem.jpg" alt="Kothotya Consultancy Services Emblem">
+          <div class="emblem-shine-sweep"></div>
+        </div>
+      </div>
+
+      <!-- Brand Typography -->
+      <div class="preloader-text">
+        <h2 class="preloader-brand-title">KOTHOTYA</h2>
+        <p class="preloader-brand-sub">CONSULTANCY SERVICES</p>
+      </div>
+
+      <!-- Luxury Progress Engine -->
+      <div class="preloader-progress-box">
+        <div class="preloader-bar-track">
+          <div class="preloader-bar-fill" id="preloader-fill"></div>
+        </div>
+        <div class="preloader-meta-row">
+          <span class="preloader-status" id="preloader-status">INITIALIZING SYSTEM...</span>
+          <span class="preloader-counter" id="preloader-counter">00%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom Cursor -->
+  <div class="custom-cursor" id="custom-cursor"></div>
+  <div class="custom-cursor-follower" id="custom-cursor-follower"></div>
+
+  <!-- Ambient Light Orbs & Starfield Canvas -->
+  <canvas id="bg-canvas"></canvas>
+  <div class="aurora-glow-1"></div>
+  <div class="aurora-glow-2"></div>
+  <div class="aurora-glow-3"></div>
+
+  <!-- Navigation Bar -->
+  <header>
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="#hero" class="nav-brand">
+          <div class="brand-emblem-wrap">
+            <img src="assets/logo-emblem.jpg" alt="KCS Emblem">
+          </div>
+          <div class="brand-text-col">
+            <span class="brand-title">KOTHOTYA</span>
+            <span class="brand-subtitle">Consultancy Services</span>
+          </div>
+        </a>
+
+        <ul class="nav-links">
+          <li><a href="#services" class="nav-link">Practice Verticals</a></li>
+          <li><a href="#estimator" class="nav-link">Scope Estimator</a></li>
+          <li><a href="#credentials" class="nav-link">Verification</a></li>
+          <li><a href="#about" class="nav-link">Leadership</a></li>
+          <li><a href="#contact" class="nav-link">Consultation</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <button class="btn-sound-toggle" id="btn-sound-toggle" title="Toggle Ambient Acoustic Aura">
+            <i class="ph ph-speaker-slash"></i>
+          </button>
+          
+          <a href="https://wa.me/918764041596?text=Hola%20KCS%20Team%2C%20I%20would%20like%20to%20discuss%20consultancy%20services%20with%20Kothotya%20Consultancy%20Services%20%5E_%5E" target="_blank" class="btn-gold" style="padding: 10px 20px; font-size: 0.85rem;">
+            <i class="ph ph-whatsapp-logo" style="font-size: 1.15rem;"></i>
+            <span>WhatsApp</span>
+          </a>
+
+          <button class="mobile-toggle" aria-label="Toggle navigation">
+            <i class="ph ph-list"></i>
+          </button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ===================================================================
+       HERO SECTION
+       =================================================================== -->
+  <main>
+    <section class="hero-section" id="hero">
+      <div class="hero-grid">
+        
+        <div class="hero-content">
+          <div class="gold-badge">
+            <span class="pulse-dot"></span>
+            <span>Govt. Registered Enterprise • MSME & GST Certified</span>
+          </div>
+
+          <h1 class="hero-title">
+            Architecting Excellence in 
+            <span class="gold-gradient-text">Software & Corporate</span>
+            Consultancy
+          </h1>
+
+          <p class="hero-description">
+            Kothotya Consultancy Services (KCS) is a high-caliber multi-disciplinary advisory firm delivering cutting-edge computer programming, cloud infrastructure, taxation, corporate legal strategies, and turnkey management advisory for ambitious enterprises.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#services" class="btn-gold">
+              <span>Explore Practice Verticals</span>
+              <i class="ph ph-arrow-right" style="font-size: 1.1rem;"></i>
+            </a>
+            
+            <a href="#estimator" class="btn-outline-gold">
+              <i class="ph ph-calculator"></i>
+              <span>Interactive Estimator</span>
+            </a>
+          </div>
+
+          <div class="hero-trust-row">
+            <div class="trust-item">
+              <i class="ph ph-seal-check"></i>
+              <span>GSTIN: <strong>08PNQPS3095P1ZF</strong></span>
+            </div>
+            <div class="trust-item">
+              <i class="ph ph-buildings"></i>
+              <span>MSME: <strong>UDYAM-RJ-17-0625867</strong></span>
+            </div>
+            <div class="trust-item">
+              <i class="ph ph-map-pin"></i>
+              <span>Jaipur, Rajasthan</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3D Luxury Tilt Card with authentic user branding badge -->
+        <div class="hero-visual">
+          <div class="floating-pill floating-pill-1">
+            <i class="ph ph-shield-check" style="color: #10b981; font-size: 1.2rem;"></i>
+            <span>100% Legally Compliant</span>
+          </div>
+
+          <div class="floating-pill floating-pill-2">
+            <i class="ph ph-cpu" style="color: var(--gold-light); font-size: 1.2rem;"></i>
+            <span>Full-Stack Tech & Advisory</span>
+          </div>
+
+          <div class="luxury-emblem-card" data-tilt>
+            <div class="emblem-image-container">
+              <img src="assets/branding-badge.jpg" alt="Kothotya Consultancy Services Badge">
+            </div>
+
+            <div class="emblem-meta-bar">
+              <div class="emblem-proprietor">
+                <span class="proprietor-label">Proprietor</span>
+                <span class="proprietor-name">Abhishek Sharma</span>
+              </div>
+              <div class="gov-certified-badge">
+                <i class="ph ph-check-circle"></i>
+                <span>Govt. Verified</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ===================================================================
+         PRACTICE VERTICALS (SERVICES MATRIX)
+         =================================================================== -->
+    <section class="section-wrapper" id="services">
+      <div class="section-header">
+        <div class="gold-badge">
+          <span>Registered Capabilities</span>
+        </div>
+        <h2 class="section-title">
+          Institutional Expertise. <span class="gold-gradient-text">Precision Execution.</span>
+        </h2>
+        <p class="section-subtitle">
+          From full-stack custom computer programming to regulatory audits and strategic corporate counseling, KCS combines technical supremacy with statutory rigor.
+        </p>
+      </div>
+
+      <!-- Category Filter Tabs -->
+      <div class="services-tabs">
+        <button class="tab-btn active" data-filter="all">All Disciplines</button>
+        <button class="tab-btn" data-filter="tech">Computer & IT</button>
+        <button class="tab-btn" data-filter="finance">Tax & Finance</button>
+        <button class="tab-btn" data-filter="legal">Legal & Corporate</button>
+        <button class="tab-btn" data-filter="engineering">Engineering & Analytics</button>
+      </div>
+
+      <!-- Services Grid -->
+      <div class="services-grid">
+
+        <!-- 1. Computer Programming & Custom Software -->
+        <div class="service-card" data-category="tech" data-tilt>
+          <div>
+            <div class="service-top">
+              <div class="service-icon">
+                <i class="ph ph-code"></i>
+              </div>
+              <span class="service-nic-tag">NIC: 62011</span>
+            </div>
+            <h3 class="service-title">Computer Programming & Custom Software</h3>
+            <p class="service-desc">
+              End-to-end bespoke computer program development, system testing, custom algorithms, enterprise software engineering and bespoke workflow automations.
+            </p>
+            <ul class="service-features">
+              <li><i class="ph ph-check-circle"></i> Custom Client-Specific Software</li>
+              <li><i class="ph ph-check-circle"></i> Rigorous System Testing & QA</li>
+              <li><i class="ph ph-check-circle"></i> Enterprise Codebase Refactoring</li>
+            </ul>
+          </div>
+          <a href="#estimator" class="service-action-link">
+            <span>Calculate Scope & Rate</span>
+            <i class="ph ph-arrow-right"></i>
+          </a>
+        </div>
+
+        <!-- 2. Web Development & High-End UI/UX -->
+        <div class="service-card" data-category="tech" data-tilt>
+          <div>
+            <div class="service-top">
+              <div class="service-icon">
+                <i class="ph ph-browsers"></i>
+              </div>
+              <span class="service-nic-tag">NIC: 62012 / 63112</span>
+            </div>
+            <h3 class="service-title">Web Application & Interface Engineering</h3>
+            <p class="service-desc">
+              Cinematic, responsive, ultra-smooth web applications, SaaS frontends, client portals, cloud hosting, and continuous data processing infrastructures.
+            </p>
+            <ul class="service-features">
+              <li><i class="ph ph-check-circle"></i> Luxury Aesthetics & Micro-interactions</li>
+              <li><i class="ph ph-check-circle"></i> Cloud Hosting & Domain Management</li>
+              <li><i class="ph ph-check-circle"></i> Performance-Optimized Web Architecture</li>
+            </ul>
+          </div>
+          <a href="#estimator" class="service-action-link">
+            <span>Design Your Web Portal</span>
+            <i class="ph ph-arrow-right"></i>
+          </a>
+        </div>
+
+        <!-- 3. IT Facilities & Disaster Recovery -->
+        <div class="service-card" data-category="tech" data-tilt>
+          <div>
+            <div class="service-top">
+              <div class="service-icon">
+                <i class="ph ph-shield-warning"></i>
+              </div>
+              <span class="service-nic-tag">NIC: 62020 / 62092</span>
+            </div>
+            <h3 class="service-title">IT Facilities Management & Disaster Recovery</h3>
+            <p class="service-desc">
+              Comprehensive maintenance, server cluster management, automated backup strategies, and rapid-recovery mechanisms for uninterrupted corporate uptime.
+            </p>
+            <ul class="service-features">
+              <li><i class="ph ph-check-circle"></i> 24/7 IT Infrastructure Monitoring</li>
+              <li><i class="ph ph-check-circle"></i> High-Availability Disaster Recovery</li>
+              <li><i class="ph ph-check-circle"></i> System Security & Data Integrity</li>
+            </ul>
+          </div>
+          <a href="#contact" class="service-action-link">
+            <span>Inquire Infrastructure</span>
+            <i class="ph ph-arrow-right"></i>
+          </a>
+        </div>
+
+        <!-- 4. Tax Consultancy & Auditing -->
+        <div class="service-card" data-category="finance" data-tilt>
+          <div>
+            <div class="service-top">
+              <div class="service-icon">
+                <i class="ph ph-receipt"></i>
+              </div>
+              <span class="service-nic-tag">NIC: 69201 / 69202</span>
+            </div>
+            <h3 class="service-title">Taxation, GST & Audit Advisory</h3>
+            <p class="service-desc">
+              Statutory GST compliance, income tax structuring, corporate bookkeeping, regulatory filings, and systematic auditing to maximize financial efficiency.
+            </p>
+            <ul class="service-features">
+              <li><i class="ph ph-check-circle"></i> GST Filing & Annual Reconciliation</li>
+              <li><i class="ph ph-check-circle"></i> Corporate Tax Planning & Audit Prep</li>
+              <li><i class="ph ph-check-circle"></i> Bookkeeping & Ledger Optimization</li>
+            </ul>
+          </div>
+          <a href="#estimator" class="service-action-link">
+            <span>Review Tax Compliance</span>
+            <i class="ph ph-arrow-right"></i>
+          </a>
+        </div>
+
+        <!-- 5. Fund Management & Risk Evaluation -->
+        <div class="service-card" data-category="finance" data-tilt>
+          <div>
+            <div class="service-top">
+              <div class="service-icon">
+                <i class="ph ph-chart-line-up"></i>
+              </div>
+              <span class="service-nic-tag">NIC: 66210 / 66309</span>
+            </div>
+            <h3 class="service-title">Risk Assessment & Fund Advisory</h3>
+            <p class="service-desc">
+              In-depth operational risk evaluation, damage risk assessments, investment structuring, and disciplined capital allocation consulting.
+            </p>
+            <ul class="service-features">
+              <li><i class="ph ph-check-circle"></i> Risk Mitigation & Portfolio Audits</li>
+              <li><i class="ph ph-check-circle"></i> Corporate Credit Evaluation</li>
+              <li><i class="ph ph-check-circle"></i> Capital Strategy Structuring</li>
+            </ul>
+          </div>
+          <a href="#contact" class="service-action-link">
+            <span>Consult Financial Analysts</span>
+            <i class="ph ph-arrow-right"></i>
+          </a>
+        </div>
+
+        <!-- 6. Legal & Management Consultancy -->
+        <div class="service-card" data-category="legal" data-tilt>
+          <div>
+            <div class="service-top">
+              <div class="service-icon">
+                <i class="ph ph-scales"></i>
+              </div>
+              <span class="service-nic-tag">NIC: 69100 / 70200</span>
+            </div>
+            <h3 class="service-title">Corporate Legal & Management Strategy</h3>
+            <p class="service-desc">
+              Guidance through commercial contracts, statutory regulations, corporate governance, organizational structuring, and executive business roadmaps.
+            </p>
+            <ul class="service-features">
+              <li><i class="ph ph-check-circle"></i> Regulatory Compliance & Documentation</li>
+              <li><i class="ph ph-check-circle"></i> Business Entity Structuring</li>
+              <li><i class="ph ph-check-circle"></i> Executive Decision Advisory</li>
+            </ul>
+          </div>
+          <a href="#contact" class="service-action-link">
+            <span>Request Legal Advisory</span>
+            <i class="ph ph-arrow-right"></i>
+          </a>
+        </div>
+
+        <!-- 7. Architectural & Technical Testing -->
+        <div class="service-card" data-category="engineering" data-tilt>
+          <div>
+            <div class="service-top">
+              <div class="service-icon">
+                <i class="ph ph-compass-tool"></i>
+              </div>
+              <span class="service-nic-tag">NIC: 71100 / 71200</span>
+            </div>
+            <h3 class="service-title">Architectural & Technical Analysis</h3>
+            <p class="service-desc">
+              Technical feasibility evaluations, structural consultation, architectural advisory, and material & engineering testing services.
+            </p>
+            <ul class="service-features">
+              <li><i class="ph ph-check-circle"></i> Engineering Assessment Reports</li>
+              <li><i class="ph ph-check-circle"></i> Technical Testing & Quality Analysis</li>
+              <li><i class="ph ph-check-circle"></i> Property & Asset Consultation</li>
+            </ul>
+          </div>
+          <a href="#contact" class="service-action-link">
+            <span>Explore Technical Testing</span>
+            <i class="ph ph-arrow-right"></i>
+          </a>
+        </div>
+
+        <!-- 8. Market Research & Strategic Advertising -->
+        <div class="service-card" data-category="engineering" data-tilt>
+          <div>
+            <div class="service-top">
+              <div class="service-icon">
+                <i class="ph ph-megaphone"></i>
+              </div>
+              <span class="service-nic-tag">NIC: 73100 / 73200</span>
+            </div>
+            <h3 class="service-title">Market Intelligence & Brand Strategy</h3>
+            <p class="service-desc">
+              Data-backed market research, demographic opinion polling, high-impact campaign architecture, and comprehensive brand narrative development.
+            </p>
+            <ul class="service-features">
+              <li><i class="ph ph-check-circle"></i> Competitive Landscape Research</li>
+              <li><i class="ph ph-check-circle"></i> Public Opinion & Sentiment Polling</li>
+              <li><i class="ph ph-check-circle"></i> Targeted Omni-Channel Advertising</li>
+            </ul>
+          </div>
+          <a href="#estimator" class="service-action-link">
+            <span>Deploy Growth Campaign</span>
+            <i class="ph ph-arrow-right"></i>
+          </a>
+        </div>
+
+        <!-- 9. Crown Accreditation Showcase Card: 32+ NIC Industry Sectors -->
+        <div class="service-card service-card-highlight" data-category="all" data-tilt>
+          <div>
+            <div class="service-top">
+              <div class="service-icon crown-icon">
+                <i class="ph ph-crown"></i>
+              </div>
+              <span class="service-nic-tag gold-tag">ACCREDITED SPECTRUM</span>
+            </div>
+
+            <div class="highlight-stat-row">
+              <span class="highlight-huge-num gold-gradient-text">32+</span>
+              <div class="highlight-stat-label">
+                <strong>NIC Industry Sectors</strong>
+                <span>Government Registered Scope</span>
+              </div>
+            </div>
+
+            <p class="service-desc" style="margin-top: 14px;">
+              Formally registered and authorized by the Ministry of Micro, Small and Medium Enterprises across 32 comprehensive industry classifications spanning Software, Taxation, Corporate Law, and Technical Engineering.
+            </p>
+
+            <ul class="service-features">
+              <li><i class="ph ph-check-circle" style="color: var(--gold-light);"></i> Turnkey Multi-Vertical Operations</li>
+              <li><i class="ph ph-check-circle" style="color: var(--gold-light);"></i> Single-Window Accountability</li>
+              <li><i class="ph ph-check-circle" style="color: var(--gold-light);"></i> 100% Certified Regulatory Backing</li>
+            </ul>
+          </div>
+
+          <a href="#credentials" class="service-action-link" style="color: #fff;">
+            <span>Explore All 32 Classifications</span>
+            <i class="ph ph-arrow-right" style="color: var(--gold-light);"></i>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ===================================================================
+         INTERACTIVE ESTIMATOR & INSTANT SCOPE CALCULATOR
+         =================================================================== -->
+    <section class="section-wrapper" id="estimator">
+      <div class="section-header">
+        <div class="gold-badge">
+          <span>Transparent Scope Engine</span>
+        </div>
+        <h2 class="section-title">
+          Interactive Engagement <span class="gold-gradient-text">Estimator</span>
+        </h2>
+        <p class="section-subtitle">
+          Configure your service requirements, scale, and delivery timeframe to obtain an immediate ballpark estimate and generate a 1-click quote brief.
+        </p>
+      </div>
+
+      <div class="estimator-container">
+        <div class="estimator-grid">
+          
+          <div class="estimator-options">
+            
+            <!-- Option 1: Practice Vertical -->
+            <div>
+              <div class="option-group-title">
+                <i class="ph ph-squares-four"></i>
+                <span>1. Select Primary Practice Discipline</span>
+              </div>
+              <div class="choice-pills">
+                <label class="choice-chip">
+                  <input type="radio" name="est-domain" value="software" checked>
+                  <span>IT & Custom Software</span>
+                </label>
+                <label class="choice-chip">
+                  <input type="radio" name="est-domain" value="tax-audit">
+                  <span>Tax, GST & Accounting</span>
+                </label>
+                <label class="choice-chip">
+                  <input type="radio" name="est-domain" value="legal">
+                  <span>Legal & Corporate Advisory</span>
+                </label>
+                <label class="choice-chip">
+                  <input type="radio" name="est-domain" value="multi-vertical">
+                  <span>Full Turnkey Multi-Vertical</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Option 2: Enterprise Scale -->
+            <div>
+              <div class="option-group-title">
+                <i class="ph ph-buildings"></i>
+                <span>2. Operational Scale</span>
+              </div>
+              <div class="choice-pills">
+                <label class="choice-chip">
+                  <input type="radio" name="est-scale" value="startup">
+                  <span>Startup Firm</span>
+                </label>
+                <label class="choice-chip">
+                  <input type="radio" name="est-scale" value="standard" checked>
+                  <span>Established Business</span>
+                </label>
+                <label class="choice-chip">
+                  <input type="radio" name="est-scale" value="enterprise">
+                  <span>Corporate Enterprise</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Option 3: Timeline Slider -->
+            <div class="range-container">
+              <div class="option-group-title" style="justify-content: space-between;">
+                <span style="display: flex; align-items: center; gap: 8px;">
+                  <i class="ph ph-clock"></i>
+                  <span>3. Desired Completion Horizon:</span>
+                </span>
+                <span id="timeline-val" style="color: var(--text-gold); font-weight: 700;">4 Weeks</span>
+              </div>
+              <input type="range" class="range-slider" id="timeline-slider" min="1" max="12" value="4">
+              <div class="range-marks">
+                <span>1 Week (Fast-Track)</span>
+                <span>4 Weeks (Standard)</span>
+                <span>12 Weeks (Extended)</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Estimation Calculation Output Card -->
+          <div class="estimator-result-card" data-tilt>
+            <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; flex-wrap: wrap; gap: 10px; margin-bottom: 12px;">
+              <span class="result-badge">
+                <i class="ph ph-sparkle"></i> Ballpark Project Estimate
+              </span>
+
+              <div class="currency-switcher" id="currency-switcher">
+                <button type="button" class="curr-btn active" data-curr="INR">₹ INR</button>
+                <button type="button" class="curr-btn" data-curr="USD">$ USD</button>
+              </div>
+            </div>
+            
+            <div class="result-price-display">
+              <span class="currency" id="est-currency-symbol">₹</span>
+              <span class="price-number" id="est-price-val">44,000</span>
+            </div>
+
+            <p class="result-meta">
+              Customized scope customized to your exact statutory or software framework. Subject to milestone review.
+            </p>
+
+            <a href="#" class="btn-gold btn-send-estimate" id="btn-whatsapp-estimate" target="_blank">
+              <i class="ph ph-whatsapp-logo" style="font-size: 1.25rem;"></i>
+              <span>Initiate via WhatsApp</span>
+            </a>
+
+            <div style="font-size: 0.76rem; color: var(--text-dim);">
+              <i class="ph ph-lock-key"></i> Direct conversation With KCS Team
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         GOVERNMENT VERIFICATION & STATUTORY CREDENTIALS
+         =================================================================== -->
+    <section class="section-wrapper" id="credentials" style="padding-top: 80px; padding-bottom: 80px;">
+      <div class="section-header" style="margin-bottom: 40px;">
+        <div class="gold-badge">
+          <span class="pulse-dot"></span>
+          <span>Government Authorized Enterprise</span>
+        </div>
+        <h2 class="section-title">
+          Official Statutory <span class="gold-gradient-text">Verification & Credentials</span>
+        </h2>
+        <p class="section-subtitle">
+          Government of India authorized business registration, official GSTIN certification, MSME institutional status, and registered commercial premises.
+        </p>
+      </div>
+
+      <!-- Quick Copy Bar -->
+      <div class="credentials-strip" style="border-radius: var(--border-radius-lg); border: 1.5px solid var(--gold-border);">
+        <div class="credentials-container">
+          
+          <div class="cred-box">
+            <div class="cred-icon">
+              <i class="ph ph-fingerprint"></i>
+            </div>
+            <div class="cred-info">
+              <span class="cred-label">Goods & Services Tax (GSTIN)</span>
+              <div class="cred-value">
+                <span>08PNQPS3095P1ZF</span>
+                <button class="btn-copy" data-copy="08PNQPS3095P1ZF" title="Copy GSTIN">
+                  <i class="ph ph-copy"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cred-box">
+            <div class="cred-icon">
+              <i class="ph ph-identification-badge"></i>
+            </div>
+            <div class="cred-info">
+              <span class="cred-label">Udyam Registration Number</span>
+              <div class="cred-value">
+                <span>UDYAM-RJ-17-0625867</span>
+                <button class="btn-copy" data-copy="UDYAM-RJ-17-0625867" title="Copy Udyam No.">
+                  <i class="ph ph-copy"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cred-box">
+            <div class="cred-icon">
+              <i class="ph ph-phone-call"></i>
+            </div>
+            <div class="cred-info">
+              <span class="cred-label">Direct Communication Line</span>
+              <div class="cred-value" style="font-size: 0.95rem;">
+                <span>+91 8764041596</span>
+                <button class="btn-copy" data-copy="8764041596" title="Copy Number">
+                  <i class="ph ph-copy"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cred-box">
+            <div class="cred-icon">
+              <i class="ph ph-envelope-simple"></i>
+            </div>
+            <div class="cred-info">
+              <span class="cred-label">Official Correspondence</span>
+              <div class="cred-value email-val">
+                <span>kothotya.consultancy.services@gmail.com</span>
+                <button class="btn-copy" data-copy="kothotya.consultancy.services@gmail.com" title="Copy Email">
+                  <i class="ph ph-copy"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Instant Smartphone vCard Contact Download -->
+      <div style="display: flex; justify-content: center; margin: 24px 0 40px;">
+        <button type="button" class="btn-vcard" id="btn-download-vcard" title="Download Official Contact Card for Smartphones">
+          <i class="ph ph-address-book" style="font-size: 1.25rem; color: #ffd700;"></i>
+          <span>Save Official KCS Enterprise Contact to Phone (vCard)</span>
+          <i class="ph ph-download-simple" style="font-size: 1.05rem; margin-left: 4px;"></i>
+        </button>
+      </div>
+
+      <!-- Comprehensive Institutional Verification Cards -->
+      <div class="cert-grid">
+        
+        <!-- Certificate 1: GST Registration -->
+        <div class="cert-card" data-tilt>
+          <div>
+            <div class="cert-card-header">
+              <div class="cert-icon-wrap">
+                <i class="ph ph-shield-check"></i>
+              </div>
+              <span class="cert-badge-status">
+                <i class="ph ph-check-circle"></i> Active & Verified
+              </span>
+            </div>
+            <div class="cert-authority-title">Government of India • Form GST REG-06</div>
+            <h3 class="cert-name">GST Registration Certificate</h3>
+          </div>
+
+          <div class="cert-fields-list">
+            <div class="cert-field-row">
+              <span class="cert-field-k">Registration No (GSTIN):</span>
+              <span class="cert-field-v">
+                08PNQPS3095P1ZF
+                <button class="btn-copy" data-copy="08PNQPS3095P1ZF" title="Copy GSTIN"><i class="ph ph-copy"></i></button>
+              </span>
+            </div>
+            <div class="cert-field-row">
+              <span class="cert-field-k">Legal / Trade Name:</span>
+              <span class="cert-field-v" style="font-size: 0.82rem; color: #fff;">Kothotya Consultancy Services</span>
+            </div>
+            <div class="cert-field-row">
+              <span class="cert-field-k">Constitution of Business:</span>
+              <span class="cert-field-v" style="color: #34d399;">Proprietorship</span>
+            </div>
+            <div class="cert-field-row">
+              <span class="cert-field-k">Jurisdiction:</span>
+              <span class="cert-field-v" style="color: #fff;">Jaipur, Rajasthan</span>
+            </div>
+          </div>
+
+          <button type="button" class="btn-outline-gold btn-open-cert" data-cert="gst" style="margin-top: 18px; padding: 8px 16px; font-size: 0.8rem; width: 100%; justify-content: center;">
+            <i class="ph ph-file-text"></i>
+            <span>Inspect Verified GST Spec &amp; Filing</span>
+          </button>
+        </div>
+
+        <!-- Certificate 2: MSME Udyam -->
+        <div class="cert-card" data-tilt>
+          <div>
+            <div class="cert-card-header">
+              <div class="cert-icon-wrap" style="color: #34d399;">
+                <i class="ph ph-buildings"></i>
+              </div>
+              <span class="cert-badge-status">
+                <i class="ph ph-check-circle"></i> Ministry Recognized
+              </span>
+            </div>
+            <div class="cert-authority-title">Ministry of MSME • Govt. of India</div>
+            <h3 class="cert-name">Udyam Registration Certificate</h3>
+          </div>
+
+          <div class="cert-fields-list">
+            <div class="cert-field-row">
+              <span class="cert-field-k">Udyam Reg Number:</span>
+              <span class="cert-field-v">
+                UDYAM-RJ-17-0625867
+                <button class="btn-copy" data-copy="UDYAM-RJ-17-0625867" title="Copy Udyam No."><i class="ph ph-copy"></i></button>
+              </span>
+            </div>
+            <div class="cert-field-row">
+              <span class="cert-field-k">Enterprise Classification:</span>
+              <span class="cert-field-v" style="color: var(--text-gold);">Micro Enterprise</span>
+            </div>
+            <div class="cert-field-row">
+              <span class="cert-field-k">Primary Activity:</span>
+              <span class="cert-field-v" style="color: #34d399;">SERVICES</span>
+            </div>
+            <div class="cert-field-row">
+              <span class="cert-field-k">Approved Sectors:</span>
+              <span class="cert-field-v" style="color: #fff;">32 National NIC Codes</span>
+            </div>
+          </div>
+
+          <button type="button" class="btn-outline-gold btn-open-cert" data-cert="udyam" style="margin-top: 18px; padding: 8px 16px; font-size: 0.8rem; width: 100%; justify-content: center;">
+            <i class="ph ph-shield-check"></i>
+            <span>Inspect Verified MSME Filing Spec</span>
+          </button>
+        </div>
+
+        <!-- Certificate 3: Registered Premises -->
+        <div class="cert-card" data-tilt>
+          <div>
+            <div class="cert-card-header">
+              <div class="cert-icon-wrap" style="color: #f59e0b;">
+                <i class="ph ph-map-pin-line"></i>
+              </div>
+              <span class="cert-badge-status">
+                <i class="ph ph-check-circle"></i> On-Site Verified
+              </span>
+            </div>
+            <div class="cert-authority-title">Principal Place of Business</div>
+            <h3 class="cert-name">Commercial Office Premises</h3>
+          </div>
+
+          <div class="cert-fields-list">
+            <div class="cert-field-row">
+              <span class="cert-field-k">Premises / Building:</span>
+              <span class="cert-field-v" style="color: #fff;">Kothotya Market</span>
+            </div>
+            <div class="cert-field-row">
+              <span class="cert-field-k">Locality & Road:</span>
+              <span class="cert-field-v" style="font-size: 0.8rem; color: #fff;">Kunthada Rd, Kanota</span>
+            </div>
+            <div class="cert-field-row">
+              <span class="cert-field-k">District & State:</span>
+              <span class="cert-field-v" style="color: #34d399;">Jaipur, Rajasthan 303012</span>
+            </div>
+            <div class="cert-field-row">
+              <span class="cert-field-k">Nearby Landmark:</span>
+              <span class="cert-field-v" style="color: var(--text-gold);">Pooja Public School</span>
+            </div>
+          </div>
+
+          <button type="button" class="btn-outline-gold btn-open-cert" data-cert="premises" style="margin-top: 18px; padding: 8px 16px; font-size: 0.8rem; width: 100%; justify-content: center;">
+            <i class="ph ph-map-pin"></i>
+            <span>Inspect Registered Office Spec</span>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ===================================================================
+         LEADERSHIP & ENTERPRISE HERITAGE
+         =================================================================== -->
+    <section class="section-wrapper" id="about">
+      <div class="about-grid">
+        
+        <div class="about-banner-frame" data-tilt>
+          <img src="assets/banner.jpg" alt="Kothotya Consultancy Services Official Header Banner">
+        </div>
+
+        <div class="about-content">
+          <div class="leadership-tag">
+            <i class="ph ph-crown"></i>
+            <span>Executive Profile</span>
+          </div>
+
+          <h2 class="proprietor-heading">
+            Under the Leadership of <span class="gold-gradient-text">Abhishek Sharma</span>
+          </h2>
+
+          <p class="proprietor-bio">
+            Founded in Jaipur, Rajasthan, <strong>Kothotya Consultancy Services</strong> was established with a clear mandate: to dismantle the friction between technological agility and statutory compliance.
+          </p>
+
+          <p class="proprietor-bio">
+            From modern web application architectures and cloud disaster recovery to robust GST administration, tax advisory, and legal structuring, KCS provides forward-thinking leaders with single-window accountability.
+          </p>
+
+          <div class="stats-grid">
+            <div class="stat-item">
+              <div class="stat-number">100%</div>
+              <div class="stat-label">Statutory Compliance</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">32+</div>
+              <div class="stat-label">NIC Industry Sectors</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">24/7</div>
+              <div class="stat-label">Dedicated Advisory</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+<!-- ===================================================================
+         EXECUTIVE 4-STAGE DELIVERY FRAMEWORK
+         =================================================================== -->
+    <section class="section-wrapper" id="roadmap" style="padding-top: 80px; padding-bottom: 80px;">
+      <div class="section-header">
+        <div class="gold-badge">
+          <span class="pulse-dot"></span>
+          <span>Standard of Operational Excellence</span>
+        </div>
+        <h2 class="section-title">
+          The KCS Executive <span class="gold-gradient-text">Delivery Framework</span>
+        </h2>
+        <p class="section-subtitle">
+          A four-stage methodology engineered to eliminate friction between technology development and statutory governance.
+        </p>
+      </div>
+
+      <div class="roadmap-container">
+        <div class="roadmap-timeline">
+          
+          <!-- Stage 1 -->
+          <div class="roadmap-step" data-tilt>
+            <div class="step-header">
+              <div class="step-num-badge">01</div>
+              <span class="step-phase-pill">Phase I</span>
+            </div>
+            <h3 class="step-title">Discovery &amp; Scope Lock</h3>
+            <p class="step-desc">
+              In-depth technical consultation, requirement decomposition, preliminary tax/statutory audit, and mutual NDA execution.
+            </p>
+            <ul class="step-deliverables">
+              <li><i class="ph ph-check-circle"></i> Bilateral Confidentiality &amp; NDA</li>
+              <li><i class="ph ph-check-circle"></i> Definitive Statement of Work (SOW)</li>
+              <li><i class="ph ph-check-circle"></i> Milestone Invoicing Schedule</li>
+            </ul>
+          </div>
+
+          <!-- Stage 2 -->
+          <div class="roadmap-step" data-tilt>
+            <div class="step-header">
+              <div class="step-num-badge">02</div>
+              <span class="step-phase-pill">Phase II</span>
+            </div>
+            <h3 class="step-title">Architectural Blueprint</h3>
+            <p class="step-desc">
+              System architecture design, cloud infrastructure topology, database schemas, and statutory compliance framework mapping.
+            </p>
+            <ul class="step-deliverables">
+              <li><i class="ph ph-check-circle"></i> High-Availability Cloud Topology</li>
+              <li><i class="ph ph-check-circle"></i> Statutory Tax &amp; GST Mapping</li>
+              <li><i class="ph ph-check-circle"></i> UI/UX Specs &amp; Prototypes</li>
+            </ul>
+          </div>
+
+          <!-- Stage 3 -->
+          <div class="roadmap-step" data-tilt>
+            <div class="step-header">
+              <div class="step-num-badge">03</div>
+              <span class="step-phase-pill">Phase III</span>
+            </div>
+            <h3 class="step-title">Agile Milestone Execution</h3>
+            <p class="step-desc">
+              Modular sprint development, automated CI/CD deployment, ledger reconciliation, and strict statutory review.
+            </p>
+            <ul class="step-deliverables">
+              <li><i class="ph ph-check-circle"></i> Production-Grade Clean Code</li>
+              <li><i class="ph ph-check-circle"></i> Continuous Staging Previews</li>
+              <li><i class="ph ph-check-circle"></i> Executive Status Briefings</li>
+            </ul>
+          </div>
+
+          <!-- Stage 4 -->
+          <div class="roadmap-step" data-tilt>
+            <div class="step-header">
+              <div class="step-num-badge">04</div>
+              <span class="step-phase-pill">Phase IV</span>
+            </div>
+            <h3 class="step-title">Turnkey Handover &amp; Retainer</h3>
+            <p class="step-desc">
+              Final production cutover, regulatory filing approvals, source code repository handover, and ongoing priority support retainers.
+            </p>
+            <ul class="step-deliverables">
+              <li><i class="ph ph-check-circle"></i> 100% Cleared Source Handover</li>
+              <li><i class="ph ph-check-circle"></i> Official Filing Acknowledgements</li>
+              <li><i class="ph ph-check-circle"></i> Retainer Advisory Continuity</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         LUXURY FAQ ACCORDION
+         =================================================================== -->
+    <section class="section-wrapper" id="faq" style="padding-top: 80px; padding-bottom: 80px;">
+      <div class="section-header">
+        <div class="gold-badge">
+          <span>Clarity &amp; Governance</span>
+        </div>
+        <h2 class="section-title">
+          Frequently Addressed <span class="gold-gradient-text">Inquiries</span>
+        </h2>
+        <p class="section-subtitle">
+          Essential answers concerning intellectual property security, multi-vertical synergies, and engagement protocols.
+        </p>
+      </div>
+
+      <div class="faq-grid">
+        
+        <!-- FAQ 1 -->
+        <div class="faq-card">
+          <button type="button" class="faq-question-btn">
+            <span class="faq-q-text">How does KCS safeguard client intellectual property, trade secrets, and source code?</span>
+            <div class="faq-chevron"><i class="ph ph-caret-down"></i></div>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              All professional engagements operate under strict mutual Non-Disclosure Agreements (NDAs). Client codebases and confidential records are developed within isolated, encrypted private repositories with role-based access controls. Upon full financial settlement, 100% of custom-developed source code and intellectual property rights are unconditionally assigned to the client.
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="faq-card">
+          <button type="button" class="faq-question-btn">
+            <span class="faq-q-text">Why is the synergy of software engineering and statutory tax advisory advantageous?</span>
+            <div class="faq-chevron"><i class="ph ph-caret-down"></i></div>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Modern corporate growth demands both technical scalability and flawless statutory compliance. Most enterprises face friction between external software developers and separate chartered accountants. KCS bridges this divide under a single roof—engineering compliant billing software, automated tax reporting, and cloud infrastructure aligned with Indian regulatory statutes.
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="faq-card">
+          <button type="button" class="faq-question-btn">
+            <span class="faq-q-text">What are KCS's standard payment structures and deliverable milestones?</span>
+            <div class="faq-chevron"><i class="ph ph-caret-down"></i></div>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              We operate on transparent, milestone-governed invoicing. Engagements initiate with an agreed mobilization retainer deposit followed by progressive milestones tied to tangible deliverables (e.g., prototype approval, staging deployment, production sign-off). Every milestone incorporates a 5-day formal review protocol to guarantee client satisfaction before proceeding.
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 4 -->
+        <div class="faq-card">
+          <button type="button" class="faq-question-btn">
+            <span class="faq-q-text">Can KCS support corporate clients outside Rajasthan across pan-India and globally?</span>
+            <div class="faq-chevron"><i class="ph ph-caret-down"></i></div>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Yes. KCS provides seamless remote consulting and deployment for enterprises pan-India and globally. With centralized cloud staging, virtual executive briefing rooms, and official digital filings on sovereign Government portals (CBIC, MCA, Income Tax), geographical distance is completely eliminated.
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 5 -->
+        <div class="faq-card">
+          <button type="button" class="faq-question-btn">
+            <span class="faq-q-text">What does the 32+ NIC Industry Sectors accreditation mean for my business engagement?</span>
+            <div class="faq-chevron"><i class="ph ph-caret-down"></i></div>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Under our official Government of India Udyam MSME registration, KCS is authorized across 32 distinct National Industrial Classifications. This breadth enables us to legally and technically advise across custom programming (NIC 62011), web portals (NIC 62012), data processing (NIC 63112), IT facilities (NIC 62020), tax consultancy (NIC 69201), corporate law strategy (NIC 69100), and technical testing (NIC 71200) without third-party outsourcing.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+        <!-- ===================================================================
+         CONSULTATION HUB & DISPATCH
+         =================================================================== -->
+    <section class="section-wrapper" id="contact">
+      <div class="section-header">
+        <div class="gold-badge">
+          <span>Priority Communications</span>
+        </div>
+        <h2 class="section-title">
+          Schedule Your <span class="gold-gradient-text">Executive Consultation</span>
+        </h2>
+        <p class="section-subtitle">
+          Connect directly with our advisory team. We respond promptly with actionable strategic roadmaps.
+        </p>
+      </div>
+
+      <div class="contact-grid">
+        
+        <!-- Contact Channels Card -->
+        <div class="contact-card-info">
+          <div>
+            <h3 class="serif-font" style="font-size: 1.5rem; color: #fff; margin-bottom: 8px;">Direct Headquarters</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">
+              Official Office at Kothotya Market Building, Jaipur, Rajasthan.
+            </p>
+          </div>
+
+          <div class="contact-channels">
+            
+            <a href="https://wa.me/918764041596?text=Hola%20KCS%20Team%2C%20I%20am%20interested%20in%20your%20consultancy%20services%20%5E_%5E" target="_blank" class="channel-box">
+              <div class="channel-icon" style="color: #25d366;">
+                <i class="ph ph-whatsapp-logo"></i>
+              </div>
+              <div class="channel-text">
+                <span class="channel-title">WhatsApp Priority Line</span>
+                <span class="channel-val">+91 87640 41596</span>
+                <span class="channel-action-hint">Instant messaging & file review</span>
+              </div>
+            </a>
+
+            <a href="tel:8764041596" class="channel-box">
+              <div class="channel-icon">
+                <i class="ph ph-phone-call"></i>
+              </div>
+              <div class="channel-text">
+                <span class="channel-title">Direct Telephone & Call</span>
+                <span class="channel-val">+91 87640 41596</span>
+                <span class="channel-action-hint">Available for immediate consultation</span>
+              </div>
+            </a>
+
+            <a href="mailto:kothotya.consultancy.services@gmail.com" class="channel-box">
+              <div class="channel-icon">
+                <i class="ph ph-envelope-simple"></i>
+              </div>
+              <div class="channel-text">
+                <span class="channel-title">Official Inquiries</span>
+                <span class="channel-val" style="word-break: break-all;">kothotya.consultancy.services@gmail.com</span>
+                <span class="channel-action-hint">RFP & official document dispatch</span>
+              </div>
+            </a>
+
+            <div class="channel-box">
+              <div class="channel-icon">
+                <i class="ph ph-map-pin"></i>
+              </div>
+              <div class="channel-text">
+                <span class="channel-title">Principal Place of Business</span>
+                <span class="channel-val" style="font-size: 0.88rem; line-height: 1.4;">
+                  Building No. 38, Floor 1, Kothotya Market, Kunthada Road, Nayla Kanota Road, Kunthada Khurd, Kanota, Jaipur, Rajasthan - 303012
+                </span>
+                <span class="channel-action-hint">Landmark: Pooja Public School</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Consultation Form -->
+        <div class="contact-form-wrapper">
+          <div style="margin-bottom: 24px;">
+            <div class="gold-badge" style="font-size: 0.76rem; padding: 4px 12px; margin-bottom: 8px;">
+              <span class="pulse-dot"></span>
+              <span>Direct Advisory Dispatch</span>
+            </div>
+            <h3 class="serif-font" style="font-size: 1.6rem; color: #fff;">Hola KCS Team ^_^</h3>
+          </div>
+          
+          <form id="consultation-form" novalidate>
+            <div class="form-group-row">
+              <div class="form-group" id="group-name">
+                <label class="form-label" for="c-name">Your Full Name *</label>
+                <div class="form-input-wrapper">
+                  <i class="ph ph-user form-input-icon"></i>
+                  <input type="text" id="c-name" class="form-input" placeholder="e.g. Ramesh Kumar">
+                </div>
+                <div class="luxury-field-error" id="error-c-name">
+                  <i class="ph ph-warning-circle"></i>
+                  <span>Please provide your full name for consultation.</span>
+                </div>
+              </div>
+
+              <div class="form-group" id="group-phone">
+                <label class="form-label" for="c-phone">Phone / WhatsApp Number *</label>
+                <div class="form-input-wrapper">
+                  <i class="ph ph-phone form-input-icon"></i>
+                  <input type="tel" id="c-phone" class="form-input" placeholder="+91 87640 41596">
+                </div>
+                <div class="luxury-field-error" id="error-c-phone">
+                  <i class="ph ph-warning-circle"></i>
+                  <span>Please enter your contact or WhatsApp number.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group-row">
+              <div class="form-group">
+                <label class="form-label" for="c-email">Email Address</label>
+                <div class="form-input-wrapper">
+                  <i class="ph ph-envelope form-input-icon"></i>
+                  <input type="email" id="c-email" class="form-input" placeholder="name@company.com">
+                </div>
+                <div class="luxury-field-error" id="error-c-email">
+                  <i class="ph ph-warning-circle"></i>
+                  <span>Please provide a valid email format.</span>
+                </div>
+              </div>
+
+              <!-- Custom Luxury Interactive Practice Vertical Selector -->
+              <div class="form-group" style="position: relative;">
+                <label class="form-label">Practice Vertical of Interest</label>
+                
+                <!-- Native select (kept hidden for script/form synchronization) -->
+                <select id="c-service" class="form-select" style="display: none;">
+                  <option value="IT & Custom Software Development" selected>IT & Custom Software Development</option>
+                  <option value="Web Application & Interface Engineering">Web Application & Interface Engineering</option>
+                  <option value="Taxation, GST & Audit Advisory">Taxation, GST & Audit Advisory</option>
+                  <option value="Corporate Legal & Management Strategy">Corporate Legal & Management Strategy</option>
+                  <option value="Risk Assessment & Fund Advisory">Risk Assessment & Fund Advisory</option>
+                  <option value="Architectural & Technical Analysis">Architectural & Technical Analysis</option>
+                  <option value="Market Research & Brand Intelligence">Market Research & Brand Intelligence</option>
+                  <option value="Others">Others</option>
+                </select>
+
+                <!-- Custom Luxury Dropdown Box -->
+                <div class="luxury-select-box" id="luxury-select-box">
+                  <div class="luxury-select-trigger" id="luxury-select-trigger" tabindex="0">
+                    <div class="trigger-left">
+                      <div class="trigger-icon-wrap" id="trigger-icon-wrap">
+                        <i class="ph ph-code"></i>
+                      </div>
+                      <span class="trigger-text" id="trigger-text">IT & Custom Software Development</span>
+                    </div>
+                    <i class="ph ph-caret-down trigger-chevron"></i>
+                  </div>
+
+                  <!-- Dropdown Menu Drawer with Luxury Categories -->
+                  <div class="luxury-select-dropdown" id="luxury-select-dropdown">
+                    <div class="luxury-option active" data-val="IT & Custom Software Development" data-icon="ph-code">
+                      <div class="opt-left">
+                        <div class="opt-icon"><i class="ph ph-code"></i></div>
+                        <div class="opt-text-wrap">
+                          <span class="opt-title">IT & Custom Software Development</span>
+                          <span class="opt-desc">Computer Programming, Custom Codebase & Cloud</span>
+                        </div>
+                      </div>
+                      <i class="ph ph-check opt-check"></i>
+                    </div>
+
+                    <div class="luxury-option" data-val="Web Application & Interface Engineering" data-icon="ph-browsers">
+                      <div class="opt-left">
+                        <div class="opt-icon"><i class="ph ph-browsers"></i></div>
+                        <div class="opt-text-wrap">
+                          <span class="opt-title">Web Application & Interface Engineering</span>
+                          <span class="opt-desc">Luxury Web Platforms, Hosting & UI/UX</span>
+                        </div>
+                      </div>
+                      <i class="ph ph-check opt-check"></i>
+                    </div>
+
+                    <div class="luxury-option" data-val="Taxation, GST & Audit Advisory" data-icon="ph-receipt">
+                      <div class="opt-left">
+                        <div class="opt-icon"><i class="ph ph-receipt"></i></div>
+                        <div class="opt-text-wrap">
+                          <span class="opt-title">Taxation, GST & Audit Advisory</span>
+                          <span class="opt-desc">Statutory GST Filing, Bookkeeping & Auditing</span>
+                        </div>
+                      </div>
+                      <i class="ph ph-check opt-check"></i>
+                    </div>
+
+                    <div class="luxury-option" data-val="Corporate Legal & Management Strategy" data-icon="ph-scales">
+                      <div class="opt-left">
+                        <div class="opt-icon"><i class="ph ph-scales"></i></div>
+                        <div class="opt-text-wrap">
+                          <span class="opt-title">Corporate Legal & Management Strategy</span>
+                          <span class="opt-desc">Regulatory Compliance & Business Governance</span>
+                        </div>
+                      </div>
+                      <i class="ph ph-check opt-check"></i>
+                    </div>
+
+                    <div class="luxury-option" data-val="Risk Assessment & Fund Advisory" data-icon="ph-chart-line-up">
+                      <div class="opt-left">
+                        <div class="opt-icon"><i class="ph ph-chart-line-up"></i></div>
+                        <div class="opt-text-wrap">
+                          <span class="opt-title">Risk Assessment & Fund Advisory</span>
+                          <span class="opt-desc">Portfolio Evaluation, Capital Structuring</span>
+                        </div>
+                      </div>
+                      <i class="ph ph-check opt-check"></i>
+                    </div>
+
+                    <div class="luxury-option" data-val="Architectural & Technical Analysis" data-icon="ph-compass-tool">
+                      <div class="opt-left">
+                        <div class="opt-icon"><i class="ph ph-compass-tool"></i></div>
+                        <div class="opt-text-wrap">
+                          <span class="opt-title">Architectural & Technical Analysis</span>
+                          <span class="opt-desc">Structural Analysis, Feasibility & Testing</span>
+                        </div>
+                      </div>
+                      <i class="ph ph-check opt-check"></i>
+                    </div>
+
+                    <div class="luxury-option" data-val="Market Research & Brand Intelligence" data-icon="ph-megaphone">
+                      <div class="opt-left">
+                        <div class="opt-icon"><i class="ph ph-megaphone"></i></div>
+                        <div class="opt-text-wrap">
+                          <span class="opt-title">Market Research & Brand Intelligence</span>
+                          <span class="opt-desc">Demographic Polling, Campaigns & Growth Strategy</span>
+                        </div>
+                      </div>
+                      <i class="ph ph-check opt-check"></i>
+                    </div>
+
+                    <div class="luxury-option" data-val="Others" data-icon="ph-sparkle">
+                      <div class="opt-left">
+                        <div class="opt-icon"><i class="ph ph-sparkle"></i></div>
+                        <div class="opt-text-wrap">
+                          <span class="opt-title">Others</span>
+                          <span class="opt-desc">Multi-Disciplinary, Turnkey or Custom Inquiry</span>
+                        </div>
+                      </div>
+                      <i class="ph ph-check opt-check"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="c-message">Engagement Brief / Query</label>
+              <textarea id="c-message" class="form-textarea" placeholder="Detail your operational or statutory requirements..."></textarea>
+            </div>
+
+            <button type="submit" class="btn-gold" style="width: 100%; justify-content: center; padding: 15px;">
+              <span>Submit & Open WhatsApp Channel</span>
+              <i class="ph ph-paper-plane-tilt"></i>
+            </button>
+            <p style="font-size: 0.76rem; color: var(--text-dim); text-align: center; margin-top: 14px; line-height: 1.5;">
+              By submitting or dispatching an inquiry, you agree to our 
+              <a href="terms.html" style="color: var(--text-gold); text-decoration: underline;" target="_blank">Terms &amp; Conditions</a>, 
+              <a href="privacy.html" style="color: var(--text-gold); text-decoration: underline;" target="_blank">Privacy Policy</a>, and 
+              <a href="refund.html" style="color: var(--text-gold); text-decoration: underline;" target="_blank">Refund Policy</a>.
+            </p>
+          </form>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================================================================
+       FOOTER
+       =================================================================== -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-top">
+        
+        <div>
+          <a href="#hero" class="nav-brand" style="margin-bottom: 14px;">
+            <div class="brand-emblem-wrap">
+              <img src="assets/logo-emblem.jpg" alt="KCS Emblem">
+            </div>
+            <div class="brand-text-col">
+              <span class="brand-title">KOTHOTYA</span>
+              <span class="brand-subtitle">Consultancy Services</span>
+            </div>
+          </a>
+          <p class="footer-desc">
+            Government of India registered Enterprise delivering precision computer software, regulatory tax, and corporate management consultancy.
+          </p>
+          <div style="font-size: 0.8rem; color: var(--text-dim);">
+            Proprietorship Firm • Abhishek Sharma
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Practice Areas</h4>
+          <ul class="footer-links">
+            <li><a href="#services">Custom Programming</a></li>
+            <li><a href="#services">Web & SaaS Engineering</a></li>
+            <li><a href="#services">Taxation & GST Advisory</a></li>
+            <li><a href="#services">Corporate Governance</a></li>
+            <li><a href="#services">IT Disaster Recovery</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Statutory & Legal</h4>
+          <ul class="footer-links">
+            <li><a href="#credentials">GSTIN: 08PNQPS3095P1ZF</a></li>
+            <li><a href="#credentials">UDYAM-RJ-17-0625867</a></li>
+            <li><a href="terms.html">Terms & Conditions</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="refund.html">Cancellation & Refund Policy</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Connect</h4>
+          <ul class="footer-links">
+            <li><a href="https://wa.me/918764041596?text=Hola%20KCS%20Team%2C%20I%20am%20interested%20in%20your%20consultancy%20services%20%5E_%5E" target="_blank"><i class="ph ph-whatsapp-logo"></i> WhatsApp: 8764041596</a></li>
+            <li><a href="tel:8764041596"><i class="ph ph-phone"></i> Direct Call: 8764041596</a></li>
+            <li><a href="mailto:kothotya.consultancy.services@gmail.com"><i class="ph ph-envelope"></i> Email Support</a></li>
+            <li><a href="#contact"><i class="ph ph-map-pin"></i> Jaipur, Rajasthan</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom" style="flex-direction: column; gap: 10px;">
+        <div>
+          © 2026 <strong>Kothotya Consultancy Services</strong>. All Rights Reserved.
+        </div>
+        <div class="footer-legal-bar">
+          <a href="terms.html">Terms &amp; Conditions</a>
+          <span class="legal-sep">•</span>
+          <a href="privacy.html">Privacy Policy</a>
+          <span class="legal-sep">•</span>
+          <a href="refund.html">Cancellation &amp; Refund Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Quick WhatsApp Button -->
+  <a href="https://wa.me/918764041596?text=Hola%20KCS%20Team%2C%20I%20am%20interested%20in%20your%20consultancy%20services%20%5E_%5E" target="_blank" class="floating-whatsapp" title="Chat on WhatsApp" aria-label="Chat on WhatsApp">
+    <i class="ph ph-whatsapp-logo"></i>
+  </a>
+
+  <!-- Toast Notification Bar -->
+  <div class="toast-notice" id="toast-notice">
+    <i class="ph ph-check-circle" style="color: #10b981; font-size: 1.3rem;"></i>
+    <span class="toast-text">Action completed successfully</span>
+  </div>
+
+  <!-- Interactive Certificate Viewer Modal -->
+  <div class="cert-modal-backdrop" id="cert-modal-backdrop" aria-hidden="true">
+    <div class="cert-modal-window" role="dialog" aria-modal="true">
+      <button type="button" class="modal-close-btn" id="modal-close-btn" aria-label="Close modal">
+        <i class="ph ph-x"></i>
+      </button>
+
+      <div class="modal-gov-header">
+        <div class="modal-gov-icon" id="modal-gov-icon">
+          <i class="ph ph-shield-check"></i>
+        </div>
+        <div class="modal-gov-title">
+          <h3 id="modal-title">Government of India Verified Credential</h3>
+          <span id="modal-subtitle">Official Statutory Department Registry</span>
+        </div>
+      </div>
+
+      <div class="modal-data-table" id="modal-data-table">
+        <!-- Dynamically populated via JS -->
+      </div>
+
+      <div class="modal-footer-cta">
+        <div style="font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; gap: 6px;">
+          <i class="ph ph-seal-check" style="color: #10b981;"></i>
+          <span>Official Government Record • Verified Active Status</span>
+        </div>
+        <button type="button" class="btn-gold" id="modal-copy-btn" style="padding: 8px 18px; font-size: 0.84rem;">
+          <i class="ph ph-copy"></i>
+          <span>Copy Identifier</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+</body>
+</html>
