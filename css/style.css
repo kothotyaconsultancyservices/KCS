@@ -2013,8 +2013,69 @@ body {
   transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
+.floating-whatsapp::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(37, 211, 102, 0.6);
+  animation: whatsappPulseRing 2.8s ease-out infinite;
+  pointer-events: none;
+}
+
+@keyframes whatsappPulseRing {
+  0% {
+    transform: scale(0.92);
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.35;
+  }
+  100% {
+    transform: scale(1.42);
+    opacity: 0;
+  }
+}
+
 .floating-whatsapp:hover {
   transform: scale(1.12) rotate(8deg);
+}
+
+/* Copy feedback button flash */
+.btn-copy {
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-copy.copied-flash {
+  background: #10b981 !important;
+  color: #fff !important;
+  border-color: #10b981 !important;
+  transform: scale(1.18);
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.7);
+}
+
+/* Estimator Recalculate Glow Pulse */
+.estimator-result-card {
+  transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.estimator-result-card.recalculated {
+  animation: estimatorPulseGleam 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes estimatorPulseGleam {
+  0% {
+    border-color: rgba(212, 175, 55, 0.35);
+    box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.5);
+  }
+  50% {
+    border-color: #ffd700;
+    box-shadow: inset 0 0 40px rgba(212, 175, 55, 0.25), 0 0 40px rgba(212, 175, 55, 0.4), 0 0 60px rgba(16, 185, 129, 0.2);
+  }
+  100% {
+    border-color: rgba(212, 175, 55, 0.35);
+    box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.5);
+  }
 }
 
 /* Toast Notification */
@@ -3249,12 +3310,46 @@ body {
   opacity: 0.5;
 }
 
+/* Radiant Traveling Laser Beam along Timeline */
+.roadmap-timeline::after {
+  content: '';
+  position: absolute;
+  top: 44px;
+  left: 60px;
+  width: 140px;
+  height: 4px;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, transparent, #ffd700, #fff, #10b981, transparent);
+  box-shadow: 0 0 15px #ffd700, 0 0 25px rgba(16, 185, 129, 0.6);
+  z-index: 2;
+  pointer-events: none;
+  animation: roadmapLaserSweep 4.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes roadmapLaserSweep {
+  0% {
+    left: 40px;
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    left: calc(100% - 180px);
+    opacity: 0;
+  }
+}
+
 @media (max-width: 975px) {
   .roadmap-timeline {
     grid-template-columns: 1fr;
     gap: 30px;
   }
-  .roadmap-timeline::before {
+  .roadmap-timeline::before,
+  .roadmap-timeline::after {
     display: none;
   }
 }
@@ -3287,6 +3382,7 @@ body {
 }
 
 .step-num-badge {
+  position: relative;
   width: 48px;
   height: 48px;
   border-radius: 12px;
@@ -3300,6 +3396,31 @@ body {
   font-weight: 700;
   color: #ffd700;
   box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+}
+
+.step-num-badge::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 15px;
+  border: 1.5px solid rgba(212, 175, 55, 0.3);
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+  animation: badgeAuraPulse 3.5s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes badgeAuraPulse {
+  0% {
+    transform: scale(0.96);
+    opacity: 0.35;
+    border-color: rgba(212, 175, 55, 0.25);
+  }
+  100% {
+    transform: scale(1.08);
+    opacity: 0.85;
+    border-color: #ffd700;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.5), 0 0 10px rgba(16, 185, 129, 0.35);
+  }
 }
 
 .step-phase-pill {

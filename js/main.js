@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initVCardDownload();
   initCertModal();
   initFaqAccordion();
+  initStatCounters();
 });
 
 /* -------------------------------------------------------------------
@@ -609,6 +610,7 @@ function initServicesFilter() {
 
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
+      playLuxeSound('select');
       filterBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
 
@@ -635,7 +637,7 @@ function initServicesFilter() {
 }
 
 /* -------------------------------------------------------------------
-   6. INTERACTIVE SCOPE & PRICE ESTIMATOR
+   6. INTERACTIVE SCOPE & PRICE ESTIMATOR (WITH ROLLING NUMBERS & SOUND)
    ------------------------------------------------------------------- */
 function initScopeEstimator() {
   const domainInputs = document.querySelectorAll('input[name="est-domain"]');
@@ -650,9 +652,45 @@ function initScopeEstimator() {
   if (!priceDisplay || !timelineSlider) return;
 
   let currentCurrency = 'INR';
+  let lastEstimatedVal = 0;
+
+  function animateEstimatePrice(targetVal, isUSD) {
+    if (lastEstimatedVal === 0 || lastEstimatedVal === targetVal) {
+      lastEstimatedVal = targetVal;
+      priceDisplay.textContent = targetVal.toLocaleString(isUSD ? 'en-US' : 'en-IN');
+      return;
+    }
+
+    const start = lastEstimatedVal;
+    const diff = targetVal - start;
+    const duration = 380;
+    const startTime = performance.now();
+
+    const resultCard = priceDisplay.closest('.estimator-result-card');
+    if (resultCard) {
+      resultCard.classList.remove('recalculated');
+      void resultCard.offsetWidth; // Trigger reflow for animation
+      resultCard.classList.add('recalculated');
+    }
+
+    function tick(now) {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+      const current = Math.round(start + diff * ease);
+      priceDisplay.textContent = current.toLocaleString(isUSD ? 'en-US' : 'en-IN');
+      if (progress < 1) {
+        requestAnimationFrame(tick);
+      } else {
+        lastEstimatedVal = targetVal;
+      }
+    }
+    requestAnimationFrame(tick);
+  }
 
   currBtns.forEach(btn => {
     btn.addEventListener('click', () => {
+      playLuxeSound('toggle');
       currBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       currentCurrency = btn.getAttribute('data-curr') || 'INR';
@@ -689,20 +727,19 @@ function initScopeEstimator() {
     let urgencyBonus = weeks <= 2 ? 1.2 : (weeks >= 6 ? 0.95 : 1);
 
     let finalPriceINR = Math.round((baseRate * multiplier * urgencyBonus) / 1000) * 1000;
-    let formattedPrice = '';
+    let targetNum = finalPriceINR;
     let scopeFormattedText = '';
 
     if (currentCurrency === 'USD') {
       // Currency conversion: ~80 INR per USD
       let finalPriceUSD = Math.round((finalPriceINR / 80) / 10) * 10;
-      formattedPrice = finalPriceUSD.toLocaleString('en-US');
-      scopeFormattedText = `$${formattedPrice} USD`;
+      targetNum = finalPriceUSD;
+      scopeFormattedText = `$${finalPriceUSD.toLocaleString('en-US')} USD`;
+      animateEstimatePrice(finalPriceUSD, true);
     } else {
-      formattedPrice = finalPriceINR.toLocaleString('en-IN');
-      scopeFormattedText = `₹${formattedPrice} INR`;
+      scopeFormattedText = `₹${finalPriceINR.toLocaleString('en-IN')} INR`;
+      animateEstimatePrice(finalPriceINR, false);
     }
-
-    priceDisplay.textContent = formattedPrice;
 
     // Update WhatsApp Inquire link
     if (btnWhatsAppEst) {
@@ -719,9 +756,18 @@ function initScopeEstimator() {
     }
   }
 
-  domainInputs.forEach(input => input.addEventListener('change', calculateEstimate));
-  scaleInputs.forEach(input => input.addEventListener('change', calculateEstimate));
-  timelineSlider.addEventListener('input', calculateEstimate);
+  domainInputs.forEach(input => input.addEventListener('change', () => {
+    playLuxeSound('micro');
+    calculateEstimate();
+  }));
+  scaleInputs.forEach(input => input.addEventListener('change', () => {
+    playLuxeSound('micro');
+    calculateEstimate();
+  }));
+  timelineSlider.addEventListener('input', () => {
+    playLuxeSound('slider');
+    calculateEstimate();
+  });
 
   calculateEstimate();
 }
@@ -970,11 +1016,20 @@ function playVelvetWarningTone() {
 function initCopyCredentials() {
   const copyButtons = document.querySelectorAll('.btn-copy');
   copyButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
       const text = btn.getAttribute('data-copy');
       if (text) {
         navigator.clipboard.writeText(text).then(() => {
-          showToast(`Copied to clipboard: ${text}`);
+          playLuxeSound('copy');
+          btn.classList.add('copied-flash');
+          const originalHTML = btn.innerHTML;
+          btn.innerHTML = '<i class="ph ph-check"></i>';
+          setTimeout(() => {
+            btn.classList.remove('copied-flash');
+            btn.innerHTML = originalHTML;
+          }, 1400);
+          showToast(`Copied identifier: ${text}`, false, { name: 'ph ph-check-circle', color: '#10b981' });
         });
       }
     });
@@ -1015,25 +1070,148 @@ function showToast(msg, isError = false, customIcon = null) {
 }
 
 /* -------------------------------------------------------------------
-   9. LUXURY AUDIO VIBE (WEB AUDIO SYNTH CHORD)
+   9. LUXURY AUDIO VIBE & MULTI-ACTION SOUNDBOARD (SYNTHESIS ENGINE)
    ------------------------------------------------------------------- */
+let globalAudioCtx = null;
+let isSoundActive = false;
+
+function getAudioContext() {
+  if (!globalAudioCtx) {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (AudioContext) {
+      globalAudioCtx = new AudioContext();
+    }
+  }
+  if (globalAudioCtx && globalAudioCtx.state === 'suspended') {
+    globalAudioCtx.resume();
+  }
+  return globalAudioCtx;
+}
+
+function playLuxeSound(type) {
+  if (!isSoundActive) return;
+
+  try {
+    const ctx = getAudioContext();
+    if (!ctx) return;
+    const now = ctx.currentTime;
+
+    if (type === 'micro') {
+      // Delicate crystalline hover / small pill click
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(659.25, now); // E5
+      gain.gain.setValueAtTime(0, now);
+      gain.gain.linearRampToValueAtTime(0.02, now + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.15);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.16);
+
+    } else if (type === 'select') {
+      // Upbeat ascending royal chime for filter tabs & options
+      [587.33, 739.99].forEach((freq, i) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, now + i * 0.06);
+        gain.gain.setValueAtTime(0, now + i * 0.06);
+        gain.gain.linearRampToValueAtTime(0.03, now + i * 0.06 + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + i * 0.06 + 0.25);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now + i * 0.06);
+        osc.stop(now + i * 0.06 + 0.28);
+      });
+
+    } else if (type === 'toggle') {
+      // Crisp metallic harmonic toggle note (Currency / switches)
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(880.00, now); // A5
+      gain.gain.setValueAtTime(0, now);
+      gain.gain.linearRampToValueAtTime(0.035, now + 0.015);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.2);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.22);
+
+    } else if (type === 'accordion') {
+      // Velvet harp disclosure tone
+      [369.99, 554.37].forEach((freq, i) => { // F#4 -> C#5
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, now + i * 0.05);
+        gain.gain.setValueAtTime(0, now + i * 0.05);
+        gain.gain.linearRampToValueAtTime(0.025, now + i * 0.05 + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + i * 0.05 + 0.3);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now + i * 0.05);
+        osc.stop(now + i * 0.05 + 0.32);
+      });
+
+    } else if (type === 'copy') {
+      // Dual-tone triumph chime: C#5 -> G#5
+      [554.37, 830.61].forEach((freq, i) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, now + i * 0.08);
+        gain.gain.setValueAtTime(0, now + i * 0.08);
+        gain.gain.linearRampToValueAtTime(0.04, now + i * 0.08 + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + i * 0.08 + 0.45);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now + i * 0.08);
+        osc.stop(now + i * 0.08 + 0.48);
+      });
+
+    } else if (type === 'modal') {
+      // Executive royal seal resonance: B3 -> F#4 -> B4
+      [246.94, 369.99, 493.88].forEach((freq, i) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, now + i * 0.07);
+        gain.gain.setValueAtTime(0, now + i * 0.07);
+        gain.gain.linearRampToValueAtTime(0.04, now + i * 0.07 + 0.03);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + i * 0.07 + 0.65);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now + i * 0.07);
+        osc.stop(now + i * 0.07 + 0.7);
+      });
+
+    } else if (type === 'slider') {
+      // Subtle water-crystal droplet note
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(523.25, now); // C5
+      osc.frequency.exponentialRampToValueAtTime(783.99, now + 0.08); // G5
+      gain.gain.setValueAtTime(0, now);
+      gain.gain.linearRampToValueAtTime(0.02, now + 0.015);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.12);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.13);
+    }
+  } catch (_) {}
+}
+
 function initAudioVibe() {
   const soundBtn = document.getElementById('btn-sound-toggle');
   if (!soundBtn) return;
 
-  let audioCtx = null;
-  let isSoundActive = false;
-
   soundBtn.addEventListener('click', () => {
-    if (!audioCtx) {
-      const AudioContext = window.AudioContext || window.webkitAudioContext;
-      audioCtx = new AudioContext();
-    }
-
-    if (audioCtx.state === 'suspended') {
-      audioCtx.resume();
-    }
-
+    const ctx = getAudioContext();
     isSoundActive = !isSoundActive;
     const icon = soundBtn.querySelector('i');
 
@@ -1043,7 +1221,7 @@ function initAudioVibe() {
         icon.classList.remove('ph-speaker-slash');
         icon.classList.add('ph-speaker-high');
       }
-      playLuxeChime(audioCtx);
+      playLuxeChime(ctx);
       showToast('Ambient Acoustic Aura Enabled', false, { name: 'ph ph-speaker-high', color: '#ffd700' });
     } else {
       soundBtn.classList.remove('active');
@@ -1055,13 +1233,13 @@ function initAudioVibe() {
     }
   });
 
-  // Play subtle golden chime on button hovers if enabled
-  const interactiveBtns = document.querySelectorAll('.btn-gold, .btn-outline-gold, .tab-btn');
+  // Interactive hovers across cards, buttons, badges
+  const interactiveBtns = document.querySelectorAll(
+    '.btn-gold, .btn-outline-gold, .tab-btn, .service-card, .roadmap-step, .stat-item, .choice-chip, .curr-btn, .btn-copy, .faq-question-btn, .btn-vcard, .nav-brand'
+  );
   interactiveBtns.forEach(b => {
     b.addEventListener('mouseenter', () => {
-      if (isSoundActive && audioCtx) {
-        playMicroChime(audioCtx);
-      }
+      playLuxeSound('micro');
     });
   });
 }
@@ -1113,6 +1291,7 @@ function initVCardDownload() {
   if (!vcardBtn) return;
 
   vcardBtn.addEventListener('click', () => {
+    playLuxeSound('select');
     const vcardContent = [
       'BEGIN:VCARD',
       'VERSION:3.0',
@@ -1138,7 +1317,7 @@ function initVCardDownload() {
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
 
-    showToast('Verified KCS Official Contact Card Downloaded');
+    showToast('Verified KCS Contact Card Downloaded', false, { name: 'ph ph-address-book', color: '#ffd700' });
   });
 }
 
@@ -1211,6 +1390,7 @@ function initCertModal() {
     const data = certData[certKey];
     if (!data) return;
 
+    playLuxeSound('modal');
     currentCopyVal = data.copyValue;
 
     if (modalTitle) modalTitle.textContent = data.title;
@@ -1234,6 +1414,7 @@ function initCertModal() {
   }
 
   function closeModal() {
+    playLuxeSound('micro');
     modalBackdrop.classList.remove('active');
     modalBackdrop.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
@@ -1263,7 +1444,12 @@ function initCertModal() {
     modalCopyBtn.addEventListener('click', () => {
       if (currentCopyVal) {
         navigator.clipboard.writeText(currentCopyVal).then(() => {
-          showToast(`Copied identifier: ${currentCopyVal}`);
+          playLuxeSound('copy');
+          modalCopyBtn.classList.add('copied-flash');
+          setTimeout(() => {
+            modalCopyBtn.classList.remove('copied-flash');
+          }, 1400);
+          showToast(`Copied identifier: ${currentCopyVal}`, false, { name: 'ph ph-check-circle', color: '#10b981' });
         });
       }
     });
@@ -1285,6 +1471,8 @@ function initFaqAccordion() {
     btn.addEventListener('click', () => {
       const isOpen = card.classList.contains('active');
 
+      playLuxeSound('accordion');
+
       // Close all other FAQ cards for accordion elegance
       faqCards.forEach(c => {
         c.classList.remove('active');
@@ -1298,4 +1486,55 @@ function initFaqAccordion() {
       }
     });
   });
+}
+
+/* -------------------------------------------------------------------
+   13. LUXURY STAT COUNTERS ANIMATION (OBSERVER TRIGGERED)
+   ------------------------------------------------------------------- */
+function initStatCounters() {
+  const statsGrid = document.querySelector('.stats-grid');
+  if (!statsGrid) return;
+
+  const statItems = statsGrid.querySelectorAll('.stat-item');
+  if (statItems.length < 2) return;
+
+  let animated = false;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !animated) {
+        animated = true;
+
+        // Stat 1: 32+
+        const num1 = statItems[0].querySelector('.stat-number');
+        if (num1) {
+          animateCount(num1, 0, 32, 1200, '+');
+        }
+
+        // Stat 2: 100%
+        const num2 = statItems[1].querySelector('.stat-number');
+        if (num2) {
+          animateCount(num2, 0, 100, 1400, '%');
+        }
+
+        playLuxeSound('micro');
+      }
+    });
+  }, { threshold: 0.35 });
+
+  observer.observe(statsGrid);
+
+  function animateCount(el, start, end, duration, suffix = '') {
+    const startTime = performance.now();
+    function tick(now) {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+      const val = Math.round(start + (end - start) * ease);
+      el.textContent = `${val}${suffix}`;
+      if (progress < 1) {
+        requestAnimationFrame(tick);
+      }
+    }
+    requestAnimationFrame(tick);
+  }
 }
