@@ -1339,6 +1339,9 @@ body {
 
 .choice-chip {
   cursor: pointer;
+  position: relative;
+  user-select: none;
+  display: inline-block;
 }
 
 .choice-chip input {
@@ -1346,22 +1349,77 @@ body {
 }
 
 .choice-chip span {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 10px 20px;
   border-radius: var(--border-radius-sm);
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   color: var(--text-muted);
   font-size: 0.9rem;
   font-weight: 500;
-  transition: var(--transition-fast);
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
 
+/* Luxury Light Sheen Sweep on Hover */
+.choice-chip span::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 70%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 215, 0, 0.22) 50%,
+    transparent 100%
+  );
+  transform: skewX(-25deg);
+  transition: left 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Hover Effect for Unchecked Chips */
+.choice-chip:hover span {
+  transform: translateY(-2.5px);
+  color: #ffffff;
+  border-color: rgba(212, 175, 55, 0.65);
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(16, 185, 129, 0.09) 100%);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.42), 0 0 16px rgba(212, 175, 55, 0.28);
+}
+
+.choice-chip:hover span::before {
+  left: 140%;
+}
+
+/* Active / Checked State */
 .choice-chip input:checked + span {
-  background: rgba(212, 175, 55, 0.15);
-  border-color: var(--gold-primary);
-  color: #fff;
-  box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.24) 0%, rgba(16, 185, 129, 0.15) 100%);
+  border-color: var(--gold-light);
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 0 18px rgba(212, 175, 55, 0.38), 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
+/* Hover Effect for Checked Chips */
+.choice-chip:hover input:checked + span,
+.choice-chip input:checked:hover + span {
+  transform: translateY(-2.5px);
+  border-color: #ffd700;
+  box-shadow: 0 0 26px rgba(212, 175, 55, 0.55), 0 8px 22px rgba(0, 0, 0, 0.45);
+}
+
+/* Click / Tap Micro Compression */
+.choice-chip:active span {
+  transform: translateY(0px) scale(0.97);
+  transition: transform 0.08s ease;
 }
 
 /* Range Slider */
@@ -1516,6 +1574,43 @@ body {
   border-radius: var(--border-radius-sm);
   padding: 18px;
   text-align: center;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.stat-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 70%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 215, 0, 0.16) 50%,
+    transparent 100%
+  );
+  transform: skewX(-20deg);
+  transition: left 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.stat-item:hover {
+  transform: translateY(-4px);
+  border-color: rgba(212, 175, 55, 0.6);
+  background: rgba(16, 40, 30, 0.75);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45), 0 0 20px rgba(212, 175, 55, 0.25);
+}
+
+.stat-item:hover::before {
+  left: 140%;
+}
+
+.stat-item:active {
+  transform: translateY(-1px) scale(0.98);
 }
 
 .stat-number {
@@ -1523,6 +1618,13 @@ body {
   font-size: 2rem;
   font-weight: 700;
   color: var(--gold-light);
+  display: inline-block;
+  transition: transform 0.3s ease, text-shadow 0.3s ease;
+}
+
+.stat-item:hover .stat-number {
+  transform: scale(1.06);
+  text-shadow: 0 0 18px rgba(255, 215, 0, 0.7), 0 0 10px rgba(16, 185, 129, 0.4);
 }
 
 .stat-label {

@@ -757,13 +757,22 @@ function initScopeEstimator() {
   }
 
   domainInputs.forEach(input => input.addEventListener('change', () => {
-    playLuxeSound('micro');
+    playLuxeSound('select');
     calculateEstimate();
   }));
   scaleInputs.forEach(input => input.addEventListener('change', () => {
-    playLuxeSound('micro');
+    playLuxeSound('select');
     calculateEstimate();
   }));
+
+  // Choice chips hover sound & tactile responsiveness
+  const allChoiceChips = document.querySelectorAll('.choice-chip');
+  allChoiceChips.forEach(chip => {
+    chip.addEventListener('mouseenter', () => {
+      playLuxeSound('micro');
+    });
+  });
+
   timelineSlider.addEventListener('input', () => {
     playLuxeSound('slider');
     calculateEstimate();
@@ -1489,50 +1498,94 @@ function initFaqAccordion() {
 }
 
 /* -------------------------------------------------------------------
-   13. LUXURY STAT COUNTERS ANIMATION (OBSERVER TRIGGERED)
+   13. LUXURY STAT COUNTERS ANIMATION (OBSERVER & INTERACTIVE TRIGGERED)
    ------------------------------------------------------------------- */
 function initStatCounters() {
   const statsGrid = document.querySelector('.stats-grid');
   if (!statsGrid) return;
 
   const statItems = statsGrid.querySelectorAll('.stat-item');
-  if (statItems.length < 2) return;
+  if (!statItems.length) return;
 
   let animated = false;
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && !animated) {
-        animated = true;
 
-        // Stat 1: 32+
-        const num1 = statItems[0].querySelector('.stat-number');
-        if (num1) {
-          animateCount(num1, 0, 32, 1200, '+');
-        }
+  function runCounters() {
+    if (animated) return;
+    animated = true;
 
-        // Stat 2: 100%
-        const num2 = statItems[1].querySelector('.stat-number');
-        if (num2) {
-          animateCount(num2, 0, 100, 1400, '%');
-        }
+    statItems.forEach((item, index) => {
+      const numEl = item.querySelector('.stat-number');
+      if (!numEl) return;
 
-        playLuxeSound('micro');
+      const rawTarget = numEl.getAttribute('data-target') || numEl.textContent.replace(/[^0-9]/g, '');
+      const target = parseInt(rawTarget, 10);
+      const suffix = numEl.getAttribute('data-suffix') || 
+        (numEl.textContent.includes('%') ? '%' : 
+        (numEl.textContent.includes('+') ? '+' : 
+        (numEl.textContent.includes('/7') ? '/7' : '')));
+
+      if (!isNaN(target)) {
+        const duration = 1400 + index * 200;
+        animateCount(numEl, 0, target, duration, suffix);
       }
     });
-  }, { threshold: 0.35 });
+
+    playLuxeSound('select');
+  }
+
+  // Check if stats grid is already inside viewport on load
+  const rect = statsGrid.getBoundingClientRect();
+  if (rect.top < window.innerHeight && rect.bottom >= 0) {
+    runCounters();
+  }
+
+  // IntersectionObserver triggers reliably as soon as stats enter screen
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        runCounters();
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { 
+    threshold: 0.15,
+    rootMargin: '0px 0px -40px 0px'
+  });
 
   observer.observe(statsGrid);
+
+  // Interactive Re-count on Click/Tap with Royal Sound & Pulse
+  statItems.forEach(item => {
+    item.addEventListener('click', () => {
+      const numEl = item.querySelector('.stat-number');
+      if (!numEl) return;
+      const rawTarget = numEl.getAttribute('data-target') || numEl.textContent.replace(/[^0-9]/g, '');
+      const target = parseInt(rawTarget, 10);
+      const suffix = numEl.getAttribute('data-suffix') || 
+        (numEl.textContent.includes('%') ? '%' : 
+        (numEl.textContent.includes('+') ? '+' : 
+        (numEl.textContent.includes('/7') ? '/7' : '')));
+
+      if (!isNaN(target)) {
+        playLuxeSound('select');
+        animateCount(numEl, 0, target, 900, suffix);
+      }
+    });
+  });
 
   function animateCount(el, start, end, duration, suffix = '') {
     const startTime = performance.now();
     function tick(now) {
       const elapsed = now - startTime;
       const progress = Math.min(elapsed / duration, 1);
-      const ease = 1 - Math.pow(1 - progress, 3);
+      // Quintic ease-out curve for luxurious deceleration
+      const ease = 1 - Math.pow(1 - progress, 4);
       const val = Math.round(start + (end - start) * ease);
       el.textContent = `${val}${suffix}`;
       if (progress < 1) {
         requestAnimationFrame(tick);
+      } else {
+        el.textContent = `${end}${suffix}`;
       }
     }
     requestAnimationFrame(tick);
