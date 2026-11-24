@@ -2089,17 +2089,86 @@ body {
 
 .footer-top {
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr 1fr;
-  gap: 50px;
-  margin-bottom: 50px;
+  grid-template-columns: 1.4fr 1fr 1fr 1.15fr;
+  gap: 42px;
+  margin-bottom: 45px;
+}
+
+.footer-col-brand {
+  display: flex;
+  flex-direction: column;
 }
 
 .footer-desc {
   font-size: 0.9rem;
   color: var(--text-muted);
   line-height: 1.6;
-  margin: 16px 0 20px;
+  margin: 16px 0 16px;
   max-width: 340px;
+}
+
+.footer-brand-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 20px;
+}
+
+.footer-meta-pill {
+  font-size: 0.78rem;
+  color: var(--text-gold);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.footer-meta-reg {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  font-family: monospace;
+}
+
+.footer-action-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btn-footer-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: var(--border-radius-full);
+  color: var(--gold-light);
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  width: fit-content;
+}
+
+.btn-footer-action:hover {
+  background: rgba(212, 175, 55, 0.22);
+  border-color: #ffd700;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4), 0 0 14px rgba(212, 175, 55, 0.25);
+}
+
+.footer-pwa-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.74rem;
+  color: #34d399;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  padding: 5px 12px;
+  border-radius: var(--border-radius-full);
+  width: fit-content;
 }
 
 .footer-col-title {
@@ -2114,20 +2183,85 @@ body {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 11px;
 }
 
 .footer-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
   color: var(--text-muted);
   text-decoration: none;
   font-size: 0.88rem;
-  transition: var(--transition-fast);
+  transition: all 0.25s ease;
+}
+
+.footer-links a i {
+  color: var(--gold-primary);
+  font-size: 0.95rem;
+  opacity: 0.85;
+  transition: all 0.2s ease;
 }
 
 .footer-links a:hover {
-  color: var(--gold-light);
+  color: #fff;
   transform: translateX(4px);
-  display: inline-block;
+}
+
+.footer-links a:hover i {
+  opacity: 1;
+  color: var(--gold-light);
+  transform: scale(1.1);
+}
+
+.footer-link-btn {
+  background: none;
+  border: none;
+  color: var(--gold-light);
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 0;
+  text-align: left;
+  transition: all 0.25s ease;
+}
+
+.footer-link-btn:hover {
+  color: #fff;
+  transform: translateX(4px);
+  text-shadow: 0 0 12px rgba(255, 215, 0, 0.5);
+}
+
+.footer-legal-inline {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.footer-legal-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+}
+
+.footer-legal-links a {
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-legal-links a:hover {
+  color: var(--gold-light);
+  text-decoration: underline;
+}
+
+.legal-dot {
+  color: rgba(212, 175, 55, 0.4);
 }
 
 .footer-bottom {
@@ -2135,16 +2269,40 @@ body {
   border-top: 1px solid rgba(212, 175, 55, 0.16);
   display: flex;
   align-items: center;
-  justify-content: center; /* Exactly centered in the middle */
-  text-align: center;
-  font-size: 0.92rem;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 0.88rem;
   color: #9ca3af;
   width: 100%;
 }
 
-.footer-bottom strong {
+.footer-bottom-copy strong {
   color: var(--gold-light);
   font-weight: 700;
+}
+
+.footer-compliance-badges {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.compliance-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.74rem;
+  color: var(--text-dim);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 4px 10px;
+  border-radius: var(--border-radius-full);
+}
+
+.compliance-badge i {
+  color: #10b981;
 }
 
 /* Floating WhatsApp Button */
@@ -2805,11 +2963,18 @@ body {
   /* Footer */
   .footer-top {
     grid-template-columns: 1fr;
-    gap: 28px;
+    gap: 32px;
   }
   .footer-bottom {
-    padding-top: 22px;
-    font-size: 0.82rem;
+    padding-top: 24px;
+    font-size: 0.84rem;
+    flex-direction: column;
+    text-align: center;
+    gap: 14px;
+  }
+  .footer-compliance-badges {
+    justify-content: center;
+    gap: 8px;
   }
 
   /* Floating WhatsApp */

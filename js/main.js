@@ -1279,13 +1279,23 @@ function initAudioVibe() {
     }
   });
 
-  // Interactive hovers across cards, buttons, badges
+  // Interactive hovers across cards, buttons, badges, footer links & tools
   const interactiveBtns = document.querySelectorAll(
-    '.btn-gold, .btn-outline-gold, .tab-btn, .service-card, .roadmap-step, .stat-item, .choice-chip, .curr-btn, .btn-copy, .faq-question-btn, .btn-vcard, .nav-brand'
+    '.btn-gold, .btn-outline-gold, .tab-btn, .service-card, .roadmap-step, .stat-item, .choice-chip, .curr-btn, .btn-copy, .faq-question-btn, .btn-vcard, .nav-brand, .footer-links a, .footer-link-btn, .btn-footer-action, .footer-legal-links a, .compliance-badge, .footer-pwa-badge, .btn-open-nic-modal'
   );
   interactiveBtns.forEach(b => {
     b.addEventListener('mouseenter', () => {
       playLuxeSound('micro');
+    });
+  });
+
+  // Click sounds on interactive footer links and buttons
+  const clickElements = document.querySelectorAll(
+    '.footer-links a, .footer-link-btn, .btn-footer-action, .footer-legal-links a'
+  );
+  clickElements.forEach(el => {
+    el.addEventListener('click', () => {
+      playLuxeSound('select');
     });
   });
 }
@@ -1333,10 +1343,10 @@ function playMicroChime(ctx) {
    10. SMARTPHONE VCARD (CONTACT CARD) GENERATOR
    ------------------------------------------------------------------- */
 function initVCardDownload() {
-  const vcardBtn = document.getElementById('btn-download-vcard');
-  if (!vcardBtn) return;
+  const vcardBtns = document.querySelectorAll('#btn-download-vcard, #btn-footer-vcard, .btn-download-vcard');
+  if (!vcardBtns.length) return;
 
-  vcardBtn.addEventListener('click', () => {
+  function triggerVCard() {
     playLuxeSound('select');
     const vcardContent = [
       'BEGIN:VCARD',
@@ -1364,6 +1374,11 @@ function initVCardDownload() {
     URL.revokeObjectURL(url);
 
     showToast('Verified KCS Contact Card Downloaded', false, { name: 'ph ph-address-book', color: '#ffd700' });
+  }
+
+  vcardBtns.forEach(btn => {
+    btn.addEventListener('click', triggerVCard);
+    btn.addEventListener('mouseenter', () => playLuxeSound('micro'));
   });
 }
 
@@ -1763,7 +1778,7 @@ function initProposalPdfDownload() {
         </div>
 
         <div class="credentials-bar">
-          <div><strong>UDYAM Registration:</strong><br>UDYAM-RJ-17-0402246</div>
+          <div><strong>UDYAM Registration:</strong><br>UDYAM-RJ-17-0625867</div>
           <div><strong>Government Portal Status:</strong><br>Verified Active Micro (Services)</div>
           <div><strong>Direct Advisory Hotline:</strong><br>+91 87640 41596 (WhatsApp/Call)</div>
         </div>
@@ -1980,11 +1995,11 @@ function initNicDirectoryModal() {
    ------------------------------------------------------------------- */
 function initDiscoveryBookingModal() {
   const modalBackdrop = document.getElementById('booking-modal-backdrop');
-  const triggerBtn = document.getElementById('btn-open-booking-modal');
+  const triggerBtns = document.querySelectorAll('#btn-open-booking-modal, #btn-footer-booking, .btn-open-booking');
   const closeBtn = document.getElementById('booking-modal-close');
   const confirmBtn = document.getElementById('btn-confirm-booking');
 
-  if (!modalBackdrop || !triggerBtn) return;
+  if (!modalBackdrop || !triggerBtns.length) return;
 
   function bindPillGroup(containerId) {
     const container = document.getElementById(containerId);
@@ -2017,7 +2032,10 @@ function initDiscoveryBookingModal() {
     document.body.style.overflow = '';
   }
 
-  triggerBtn.addEventListener('click', openModal);
+  triggerBtns.forEach(btn => {
+    btn.addEventListener('click', openModal);
+    btn.addEventListener('mouseenter', () => playLuxeSound('micro'));
+  });
   if (closeBtn) closeBtn.addEventListener('click', closeModal);
 
   modalBackdrop.addEventListener('click', (e) => {
