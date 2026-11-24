@@ -267,7 +267,8 @@ function initNavbarScroll() {
   });
 
   if (toggleBtn && navLinks) {
-    toggleBtn.addEventListener('click', () => {
+    toggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
       navLinks.classList.toggle('active');
       const icon = toggleBtn.querySelector('i');
       if (icon) {
@@ -286,6 +287,30 @@ function initNavbarScroll() {
           icon.classList.remove('ph-x');
         }
       });
+    });
+
+    // Close on outside click
+    document.addEventListener('click', (e) => {
+      if (navLinks.classList.contains('active') && !navLinks.contains(e.target) && !toggleBtn.contains(e.target)) {
+        navLinks.classList.remove('active');
+        const icon = toggleBtn.querySelector('i');
+        if (icon) {
+          icon.classList.add('ph-list');
+          icon.classList.remove('ph-x');
+        }
+      }
+    });
+
+    // Reset drawer if screen is resized above tablet breakpoint
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 1024 && navLinks.classList.contains('active')) {
+        navLinks.classList.remove('active');
+        const icon = toggleBtn.querySelector('i');
+        if (icon) {
+          icon.classList.add('ph-list');
+          icon.classList.remove('ph-x');
+        }
+      }
     });
   }
 }
@@ -551,6 +576,8 @@ function initScrollSpy() {
    4. 3D TILT EFFECT FOR LUXURY CARDS
    ------------------------------------------------------------------- */
 function initTiltEffect() {
+  // Only enable 3D tilt on devices with mouse pointer and wider than 1024px to prevent mobile touch-scroll jitter
+  if (window.innerWidth <= 1024 || window.matchMedia('(pointer: coarse)').matches) return;
   const tiltCards = document.querySelectorAll('[data-tilt]');
   
   tiltCards.forEach(card => {
