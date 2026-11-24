@@ -1884,6 +1884,22 @@ function initNicDirectoryModal() {
     document.body.style.overflow = '';
   }
 
+  // Open modal from Practice Verticals "Explore All 32 Classifications" card
+  const serviceTrigger = document.getElementById('btn-services-nic-trigger');
+  if (serviceTrigger) {
+    serviceTrigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      openModal();
+    });
+  }
+
+  document.querySelectorAll('.btn-open-nic-modal').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      openModal();
+    });
+  });
+
   if (triggerBtn) triggerBtn.addEventListener('click', openModal);
   if (statTrigger) statTrigger.addEventListener('click', openModal);
   if (closeBtn) closeBtn.addEventListener('click', closeModal);
