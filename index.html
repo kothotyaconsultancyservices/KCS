@@ -622,7 +622,12 @@
               <span>Initiate via WhatsApp</span>
             </a>
 
-            <div style="font-size: 0.76rem; color: var(--text-dim);">
+            <button type="button" class="btn-download-proposal" id="btn-download-proposal">
+              <i class="ph ph-file-pdf"></i>
+              <span>Download Formal Proposal (PDF)</span>
+            </button>
+
+            <div style="font-size: 0.76rem; color: var(--text-dim); margin-top: 6px;">
               <i class="ph ph-lock-key"></i> Direct conversation With KCS Team
             </div>
           </div>
@@ -890,14 +895,22 @@
               <div class="stat-number" data-target="100" data-suffix="%">100%</div>
               <div class="stat-label">Statutory Compliance</div>
             </div>
-            <div class="stat-item" title="32+ Official NIC Industry Sectors Registered">
+            <div class="stat-item" id="stat-nic-trigger" title="Click to Explore 32+ Official NIC Industry Sectors" style="cursor: pointer;">
               <div class="stat-number" data-target="32" data-suffix="+">32+</div>
               <div class="stat-label">NIC Industry Sectors</div>
+              <span style="font-size: 0.68rem; color: var(--gold-light); display: block; margin-top: 4px; text-decoration: underline; opacity: 0.85;">View Portfolio ↗</span>
             </div>
             <div class="stat-item" title="24/7 Dedicated Strategic Advisory Support">
               <div class="stat-number" data-target="24" data-suffix="/7">24/7</div>
               <div class="stat-label">Dedicated Advisory</div>
             </div>
+          </div>
+
+          <div style="margin-top: 18px; display: flex; gap: 12px; flex-wrap: wrap;">
+            <button type="button" class="btn-outline-gold" id="btn-explore-nic" style="padding: 10px 22px; font-size: 0.84rem; border-radius: var(--border-radius-full); display: inline-flex; align-items: center; gap: 8px;">
+              <i class="ph ph-shield-check" style="font-size: 1.15rem; color: var(--gold-light);"></i>
+              <span>Explore 32+ NIC Government Sectors ↗</span>
+            </button>
           </div>
         </div>
 
@@ -994,6 +1007,118 @@
           </div>
 
         </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         EXECUTIVE CASE STUDIES & ENTERPRISE DELIVERABLES
+         =================================================================== -->
+    <section class="section-wrapper" id="case-studies" style="padding-top: 80px; padding-bottom: 80px;">
+      <div class="section-header">
+        <div class="gold-badge">
+          <span class="pulse-dot"></span>
+          <span>Verified Track Record</span>
+        </div>
+        <h2 class="section-title">
+          Signature Engagements &amp; <span class="gold-gradient-text">Proven Outcomes</span>
+        </h2>
+        <p class="section-subtitle">
+          Real-world case studies demonstrating our multi-disciplinary synthesis of technical scalability and statutory governance.
+        </p>
+      </div>
+
+      <div class="case-studies-grid">
+        
+        <!-- Case 1: Software & Cloud -->
+        <div class="case-card" data-tilt>
+          <div class="case-card-header">
+            <span class="case-tag tech-tag"><i class="ph ph-cpu"></i> IT &amp; Software Architecture</span>
+            <span class="case-timeline">5 Weeks</span>
+          </div>
+          <h3 class="case-title">Distributed Cloud Architecture &amp; Automated Disaster Recovery</h3>
+          <p class="case-desc">
+            Engineered a microservices cluster with automated failover, database encryption, and regulatory audit logging for an Indian logistics platform handling 50k+ daily events.
+          </p>
+          <div class="case-metrics-row">
+            <div class="case-metric">
+              <span class="metric-val">99.99%</span>
+              <span class="metric-label">Uptime SLA</span>
+            </div>
+            <div class="case-metric">
+              <span class="metric-val">&lt;45ms</span>
+              <span class="metric-label">API Latency</span>
+            </div>
+            <div class="case-metric">
+              <span class="metric-val">Zero</span>
+              <span class="metric-label">Data Loss</span>
+            </div>
+          </div>
+          <div class="case-footer">
+            <span class="case-client-type"><i class="ph ph-buildings"></i> Logistics Enterprise</span>
+            <a href="#estimator" class="case-action-link">Estimate Similar Scope ↗</a>
+          </div>
+        </div>
+
+        <!-- Case 2: Tax & GST -->
+        <div class="case-card" data-tilt>
+          <div class="case-card-header">
+            <span class="case-tag tax-tag"><i class="ph ph-receipt"></i> Tax &amp; GST Governance</span>
+            <span class="case-timeline">2 Weeks</span>
+          </div>
+          <h3 class="case-title">Multi-State Input Tax Credit (ITC) Recovery &amp; Audit Alignment</h3>
+          <p class="case-desc">
+            Resolved massive GSTR-2B discrepancy across 400+ supplier invoices, eliminating blocked credits and structuring automated monthly reconciliation protocols.
+          </p>
+          <div class="case-metrics-row">
+            <div class="case-metric">
+              <span class="metric-val">₹32.4L</span>
+              <span class="metric-label">ITC Recovered</span>
+            </div>
+            <div class="case-metric">
+              <span class="metric-val">100%</span>
+              <span class="metric-label">Compliance</span>
+            </div>
+            <div class="case-metric">
+              <span class="metric-val">0</span>
+              <span class="metric-label">Penalty Notices</span>
+            </div>
+          </div>
+          <div class="case-footer">
+            <span class="case-client-type"><i class="ph ph-factory"></i> Manufacturing Corp</span>
+            <a href="#estimator" class="case-action-link">Estimate Similar Scope ↗</a>
+          </div>
+        </div>
+
+        <!-- Case 3: Legal & Turnkey -->
+        <div class="case-card" data-tilt>
+          <div class="case-card-header">
+            <span class="case-tag legal-tag"><i class="ph ph-scales"></i> Turnkey Corporate Launch</span>
+            <span class="case-timeline">3 Weeks</span>
+          </div>
+          <h3 class="case-title">Turnkey Corporate Incorporation, IP Trademark &amp; Web ERP Suite</h3>
+          <p class="case-desc">
+            Delivered end-to-end launch: ROC incorporation, GST &amp; MSME registrations, registered trademark filing, and bespoke client dashboard under single-window execution.
+          </p>
+          <div class="case-metrics-row">
+            <div class="case-metric">
+              <span class="metric-val">21 Days</span>
+              <span class="metric-label">Turnaround</span>
+            </div>
+            <div class="case-metric">
+              <span class="metric-val">32+</span>
+              <span class="metric-label">NIC Covered</span>
+            </div>
+            <div class="case-metric">
+              <span class="metric-val">Single</span>
+              <span class="metric-label">Window Delivery</span>
+            </div>
+          </div>
+          <div class="case-footer">
+            <span class="case-client-type"><i class="ph ph-rocket-launch"></i> Venture-Backed Startup</span>
+            <a href="#estimator" class="case-action-link">Estimate Similar Scope ↗</a>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -1112,6 +1237,17 @@
 
           <div class="contact-channels">
             
+            <div class="channel-box channel-box-booking" id="btn-open-booking-modal" style="cursor: pointer; background: linear-gradient(135deg, rgba(212, 175, 55, 0.16) 0%, rgba(16, 185, 129, 0.12) 100%); border: 1.5px solid rgba(212, 175, 55, 0.45); box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);">
+              <div class="channel-icon" style="color: var(--gold-light);">
+                <i class="ph ph-calendar-check"></i>
+              </div>
+              <div class="channel-text">
+                <span class="channel-title" style="color: #fff; font-weight: 600;">Book 15-Min Strategy Session</span>
+                <span class="channel-val" style="color: var(--gold-light);">Select Date &amp; Time Slot ↗</span>
+                <span class="channel-action-hint">One-on-one executive alignment with Abhishek Sharma</span>
+              </div>
+            </div>
+
             <a href="https://wa.me/918764041596?text=Hola%20KCS%20Team%2C%20I%20am%20interested%20in%20your%20consultancy%20services%20%5E_%5E" target="_blank" class="channel-box">
               <div class="channel-icon" style="color: #25d366;">
                 <i class="ph ph-whatsapp-logo"></i>
@@ -1423,15 +1559,201 @@
     </div>
   </footer>
 
-  <!-- Floating Quick WhatsApp Button -->
-  <a href="https://wa.me/918764041596?text=Hola%20KCS%20Team%2C%20I%20am%20interested%20in%20your%20consultancy%20services%20%5E_%5E" target="_blank" class="floating-whatsapp" title="Chat on WhatsApp" aria-label="Chat on WhatsApp">
-    <i class="ph ph-whatsapp-logo"></i>
-  </a>
+  <!-- Floating WhatsApp Action Container & Quick Menu Card -->
+  <div class="floating-whatsapp-container" id="whatsapp-container">
+    
+    <!-- Quick Menu Card -->
+    <div class="whatsapp-quick-card" id="whatsapp-quick-card" aria-hidden="true">
+      <div class="wa-card-header">
+        <div class="wa-card-profile">
+          <div class="wa-card-avatar">
+            <i class="ph ph-shield-check"></i>
+          </div>
+          <div>
+            <div class="wa-card-name">KCS Strategic Advisory</div>
+            <div class="wa-card-status"><span class="wa-status-dot"></span> Online • Immediate Reply</div>
+          </div>
+        </div>
+        <button type="button" class="wa-close-btn" id="wa-card-close" aria-label="Close WhatsApp Menu">
+          <i class="ph ph-x"></i>
+        </button>
+      </div>
+
+      <div class="wa-card-body">
+        <p class="wa-card-intro">
+          Select a practice vertical to start a direct consultation with Abhishek Sharma:
+        </p>
+
+        <a href="https://wa.me/918764041596?text=Hola%20Abhishek%2C%20I%20would%20like%20to%20consult%20on%20a%20Custom%20Software%20or%20Cloud%20Architecture%20project." target="_blank" class="wa-quick-option">
+          <div class="wa-opt-icon"><i class="ph ph-code"></i></div>
+          <div class="wa-opt-text">
+            <strong>IT &amp; Custom Software</strong>
+            <span>Architecture, Web Apps &amp; Cloud</span>
+          </div>
+          <i class="ph ph-caret-right"></i>
+        </a>
+
+        <a href="https://wa.me/918764041596?text=Hola%20Abhishek%2C%20I%20need%20strategic%20advisory%20for%20Taxation%2C%20GST%20Administration%20or%20Auditing." target="_blank" class="wa-quick-option">
+          <div class="wa-opt-icon"><i class="ph ph-chart-line-up"></i></div>
+          <div class="wa-opt-text">
+            <strong>Tax, GST &amp; Accounting</strong>
+            <span>Filings, Audits &amp; Reconciliation</span>
+          </div>
+          <i class="ph ph-caret-right"></i>
+        </a>
+
+        <a href="https://wa.me/918764041596?text=Hola%20Abhishek%2C%20I%20would%20like%20to%20discuss%20Legal%20Structuring%2C%20Compliance%20or%20Corporate%20Governance." target="_blank" class="wa-quick-option">
+          <div class="wa-opt-icon"><i class="ph ph-scales"></i></div>
+          <div class="wa-opt-text">
+            <strong>Legal &amp; Corporate Advisory</strong>
+            <span>Governance, ROC &amp; Compliance</span>
+          </div>
+          <i class="ph ph-caret-right"></i>
+        </a>
+
+        <a href="https://wa.me/918764041596?text=Hola%20Abhishek%2C%20I%20am%20interested%20in%20a%20Full%20Turnkey%20Multi-Vertical%20engagement." target="_blank" class="wa-quick-option">
+          <div class="wa-opt-icon"><i class="ph ph-briefcase"></i></div>
+          <div class="wa-opt-text">
+            <strong>Full Turnkey Suite</strong>
+            <span>Single-Window Execution</span>
+          </div>
+          <i class="ph ph-caret-right"></i>
+        </a>
+      </div>
+
+      <div class="wa-card-footer">
+        <a href="https://wa.me/918764041596?text=Hola%20KCS%20Team%2C%20I%20am%20interested%20in%20your%20consultancy%20services%20%5E_%5E" target="_blank" class="wa-direct-chat-btn">
+          <i class="ph ph-whatsapp-logo"></i>
+          <span>Open Direct WhatsApp Chat</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Main Floating Trigger Button -->
+    <button type="button" class="floating-whatsapp" id="btn-toggle-wa-menu" title="Open KCS WhatsApp Advisory" aria-label="Open KCS WhatsApp Advisory">
+      <i class="ph ph-whatsapp-logo"></i>
+    </button>
+  </div>
 
   <!-- Toast Notification Bar -->
   <div class="toast-notice" id="toast-notice">
     <i class="ph ph-check-circle" style="color: #10b981; font-size: 1.3rem;"></i>
     <span class="toast-text">Action completed successfully</span>
+  </div>
+
+  <!-- Strategic Discovery Call Booking Modal -->
+  <div class="cert-modal-backdrop" id="booking-modal-backdrop" aria-hidden="true">
+    <div class="cert-modal-window booking-modal-window" role="dialog" aria-modal="true">
+      <button type="button" class="modal-close-btn" id="booking-modal-close" aria-label="Close modal">
+        <i class="ph ph-x"></i>
+      </button>
+
+      <div class="modal-gov-header">
+        <div class="modal-gov-icon" style="color: var(--gold-light);">
+          <i class="ph ph-calendar-check"></i>
+        </div>
+        <div class="modal-gov-title">
+          <h3 style="font-family: var(--font-serif); font-size: 1.35rem; color: #fff;">Book a 15-Minute Strategic Discovery Session</h3>
+          <span style="font-size: 0.82rem; color: var(--text-gold);">Direct Alignment with Abhishek Sharma, Proprietor</span>
+        </div>
+      </div>
+
+      <div class="booking-modal-body">
+        <div class="booking-field-group">
+          <label class="booking-field-label">1. Primary Practice Discipline</label>
+          <div class="booking-pills" id="booking-practice-pills">
+            <button type="button" class="booking-pill active" data-val="IT &amp; Custom Software">IT &amp; Software</button>
+            <button type="button" class="booking-pill" data-val="Taxation &amp; GST Auditing">Tax &amp; GST</button>
+            <button type="button" class="booking-pill" data-val="Legal &amp; Corporate Advisory">Corporate Legal</button>
+            <button type="button" class="booking-pill" data-val="Full Turnkey Multi-Vertical">Turnkey Suite</button>
+          </div>
+        </div>
+
+        <div class="booking-field-group">
+          <label class="booking-field-label">2. Select Preferred Time Horizon</label>
+          <div class="booking-pills" id="booking-day-pills">
+            <button type="button" class="booking-pill active" data-val="Tomorrow Morning (10:30 AM IST)">Tomorrow (10:30 AM IST)</button>
+            <button type="button" class="booking-pill" data-val="Tomorrow Afternoon (02:30 PM IST)">Tomorrow (02:30 PM IST)</button>
+            <button type="button" class="booking-pill" data-val="This Week Flexible">This Week (Flexible)</button>
+          </div>
+        </div>
+
+        <div class="booking-field-group">
+          <label class="booking-field-label">3. Preferred Communication Channel</label>
+          <div class="booking-pills" id="booking-channel-pills">
+            <button type="button" class="booking-pill active" data-val="Google Meet Video"><i class="ph ph-video-camera"></i> Google Meet</button>
+            <button type="button" class="booking-pill" data-val="WhatsApp Audio/Video"><i class="ph ph-whatsapp-logo"></i> WhatsApp Call</button>
+            <button type="button" class="booking-pill" data-val="Direct Phone Call"><i class="ph ph-phone"></i> Direct Call</button>
+          </div>
+        </div>
+
+        <div class="booking-field-group">
+          <label class="booking-field-label">4. Your Name &amp; Organization</label>
+          <input type="text" id="booking-client-name" class="booking-input" placeholder="e.g. Ramesh Kumar, Director at XYZ Corp">
+        </div>
+      </div>
+
+      <div class="booking-modal-footer">
+        <button type="button" class="btn-gold" id="btn-confirm-booking" style="width: 100%; justify-content: center; padding: 13px 24px; font-size: 0.92rem;">
+          <i class="ph ph-calendar-check"></i>
+          <span>Confirm &amp; Schedule Slot via WhatsApp</span>
+        </button>
+        <div style="font-size: 0.74rem; color: var(--text-dim); text-align: center; margin-top: 8px;">
+          <i class="ph ph-shield-check" style="color: #10b981;"></i> Confidential Direct Appointment • No Intermediaries
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive 32+ NIC Government Industry Directory Modal -->
+  <div class="cert-modal-backdrop" id="nic-modal-backdrop" aria-hidden="true">
+    <div class="cert-modal-window nic-modal-window" role="dialog" aria-modal="true">
+      <button type="button" class="modal-close-btn" id="nic-modal-close" aria-label="Close modal">
+        <i class="ph ph-x"></i>
+      </button>
+
+      <div class="modal-gov-header">
+        <div class="modal-gov-icon" style="color: var(--gold-light);">
+          <i class="ph ph-shield-check"></i>
+        </div>
+        <div class="modal-gov-title">
+          <h3 style="font-family: var(--font-serif); font-size: 1.35rem; color: #fff;">32+ NIC Government Industry Sectors</h3>
+          <span style="font-size: 0.82rem; color: var(--text-gold);">Official National Industrial Classification Registry • UDYAM-RJ-17-0402246</span>
+        </div>
+      </div>
+
+      <!-- Search & Category Filters -->
+      <div class="nic-controls">
+        <div class="nic-search-wrapper">
+          <i class="ph ph-magnifying-glass"></i>
+          <input type="text" id="nic-search-input" placeholder="Search by NIC code or keyword (e.g. 6201, Software, Tax, Legal, Cloud)...">
+        </div>
+
+        <div class="nic-category-pills" id="nic-category-pills">
+          <button type="button" class="nic-cat-btn active" data-cat="all">All Sectors (32+)</button>
+          <button type="button" class="nic-cat-btn" data-cat="tech">IT &amp; Systems</button>
+          <button type="button" class="nic-cat-btn" data-cat="tax">Tax &amp; Accounting</button>
+          <button type="button" class="nic-cat-btn" data-cat="legal">Legal &amp; Governance</button>
+          <button type="button" class="nic-cat-btn" data-cat="mgmt">Management &amp; Support</button>
+        </div>
+      </div>
+
+      <!-- Sector Cards List -->
+      <div class="nic-sectors-container" id="nic-sectors-list">
+        <!-- Dynamically rendered via JS -->
+      </div>
+
+      <div class="modal-footer-cta">
+        <div style="font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; gap: 6px;">
+          <i class="ph ph-seal-check" style="color: #10b981;"></i>
+          <span>Ministry of MSME, Govt of India • Proprietor: Abhishek Sharma</span>
+        </div>
+        <a href="#estimator" class="btn-gold" id="btn-nic-to-estimator" style="padding: 8px 18px; font-size: 0.84rem;">
+          <i class="ph ph-sparkle"></i>
+          <span>Scope Engagement</span>
+        </a>
+      </div>
+    </div>
   </div>
 
   <!-- Interactive Certificate Viewer Modal -->

@@ -21,6 +21,11 @@ document.addEventListener('DOMContentLoaded', () => {
   initCertModal();
   initFaqAccordion();
   initStatCounters();
+  initProposalPdfDownload();
+  initNicDirectoryModal();
+  initDiscoveryBookingModal();
+  initWhatsAppQuickMenu();
+  initPwaServiceWorker();
 });
 
 /* -------------------------------------------------------------------
@@ -1589,5 +1594,467 @@ function initStatCounters() {
       }
     }
     requestAnimationFrame(tick);
+  }
+}
+
+/* -------------------------------------------------------------------
+   14. INSTANT PROPOSAL PDF GENERATOR (ESTIMATOR)
+   ------------------------------------------------------------------- */
+function initProposalPdfDownload() {
+  const btn = document.getElementById('btn-download-proposal');
+  if (!btn) return;
+
+  btn.addEventListener('click', () => {
+    playLuxeSound('select');
+
+    const domainInput = document.querySelector('input[name="est-domain"]:checked');
+    const scaleInput = document.querySelector('input[name="est-scale"]:checked');
+    const timelineVal = document.getElementById('timeline-val')?.textContent || '4 Weeks';
+    const priceVal = document.getElementById('est-price-val')?.textContent || '44,000';
+    const currSym = document.getElementById('est-currency-symbol')?.textContent || '₹';
+
+    const domainNames = {
+      'software': 'IT & Custom Software Engineering Architecture',
+      'tax-audit': 'Taxation, GST & Statutory Accounting Advisory',
+      'legal': 'Legal & Corporate Management Governance',
+      'multi-vertical': 'Full Turnkey Multi-Vertical Enterprise Suite'
+    };
+
+    const scaleNames = {
+      'startup': 'Startup Firm Tier (Agile Scope)',
+      'standard': 'Established Business Tier (Standard Growth Framework)',
+      'enterprise': 'Corporate Enterprise Tier (High-Concurrency & Governance)'
+    };
+
+    const domainTitle = domainNames[domainInput?.value] || 'Strategic Professional Advisory';
+    const scaleTitle = scaleNames[scaleInput?.value] || 'Standard Corporate Engagement';
+    const quotationRef = `KCS/PROP/2026/${Math.floor(1000 + Math.random() * 9000)}`;
+    const today = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+
+    const printContent = `
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <title>KCS Official Scope Proposal - ${quotationRef}</title>
+        <style>
+          * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+          body { padding: 40px; color: #1a202c; background: #fff; line-height: 1.5; font-size: 13px; }
+          .proposal-header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #d4af37; padding-bottom: 20px; margin-bottom: 25px; }
+          .firm-brand { font-size: 20px; font-weight: 800; color: #040807; letter-spacing: 0.05em; text-transform: uppercase; font-family: Georgia, serif; }
+          .firm-tag { font-size: 11px; color: #b8972e; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-top: 3px; }
+          .firm-address { font-size: 10px; color: #718096; margin-top: 6px; max-width: 320px; line-height: 1.4; }
+          .quote-meta { text-align: right; }
+          .quote-title { font-size: 14px; font-weight: 700; color: #064e3b; text-transform: uppercase; }
+          .quote-ref { font-family: monospace; font-size: 12px; color: #d4af37; font-weight: 700; margin: 4px 0; }
+          .quote-date { font-size: 11px; color: #718096; }
+          .summary-card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 16px; margin-bottom: 25px; }
+          .summary-card h4 { font-size: 12px; text-transform: uppercase; color: #b8972e; margin-bottom: 8px; letter-spacing: 0.05em; }
+          .scope-table { width: 100%; border-collapse: collapse; margin-bottom: 25px; }
+          .scope-table th { background: #064e3b; color: #fff; text-align: left; padding: 10px 14px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+          .scope-table td { padding: 12px 14px; border-bottom: 1px solid #e2e8f0; font-size: 12px; }
+          .total-box { background: #ecfdf5; border: 1.5px solid #10b981; border-radius: 6px; padding: 16px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+          .total-val { font-size: 22px; font-weight: 800; color: #064e3b; font-family: Georgia, serif; }
+          .credentials-bar { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 15px 0; margin-bottom: 30px; font-size: 11px; }
+          .sign-area { display: flex; justify-content: space-between; align-items: flex-end; margin-top: 40px; }
+          .seal-box { border: 1.5px dashed #d4af37; border-radius: 50%; width: 90px; height: 90px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; font-size: 9px; color: #b8972e; font-weight: 700; text-transform: uppercase; line-height: 1.2; }
+          .sign-line { text-align: right; }
+          .sign-name { font-weight: 700; font-size: 13px; color: #1a202c; }
+          .sign-role { font-size: 11px; color: #718096; }
+          @media print {
+            body { padding: 20px; }
+            @page { margin: 15mm; }
+          }
+        </style>
+      </head>
+      <body>
+        <div class="proposal-header">
+          <div>
+            <div class="firm-brand">Kothotya Consultancy Services</div>
+            <div class="firm-tag">Technology • Statutory Taxation • Corporate Law • Advisory</div>
+            <div class="firm-address">
+              Building No. 38, Floor 1, Kothotya Market, Kunthada Road, Nayla Kanota Road, Kanota, Jaipur, Rajasthan - 303012<br>
+              Proprietor: Abhishek Sharma | Email: kothotya.consultancy.services@gmail.com | Phone: +91 87640 41596
+            </div>
+          </div>
+          <div class="quote-meta">
+            <div class="quote-title">Formal Scope Quotation</div>
+            <div class="quote-ref">${quotationRef}</div>
+            <div class="quote-date">Date: ${today}</div>
+          </div>
+        </div>
+
+        <div class="summary-card">
+          <h4>Engagement Overview</h4>
+          <p>This document details the preliminary scope specification, milestone investment schedule, and statutory execution parameters formulated for the engagement configuration selected below.</p>
+        </div>
+
+        <table class="scope-table">
+          <thead>
+            <tr>
+              <th>Engagement Dimension</th>
+              <th>Specification Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Primary Practice Vertical</strong></td>
+              <td>${domainTitle}</td>
+            </tr>
+            <tr>
+              <td><strong>Enterprise Operational Scale</strong></td>
+              <td>${scaleTitle}</td>
+            </tr>
+            <tr>
+              <td><strong>Targeted Completion Horizon</strong></td>
+              <td>${timelineVal} (Structured in 4 Milestone Sprints)</td>
+            </tr>
+            <tr>
+              <td><strong>Methodology & Delivery</strong></td>
+              <td>Executive 4-Stage Framework: Discovery $\\rightarrow$ Architecture $\\rightarrow$ Synthesis $\\rightarrow$ Governance</td>
+            </tr>
+            <tr>
+              <td><strong>Statutory Governance SLA</strong></td>
+              <td>100% Compliance guarantee with zero third-party data exposure</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="total-box">
+          <div>
+            <div style="font-size: 11px; text-transform: uppercase; color: #064e3b; font-weight: 700; letter-spacing: 0.05em;">Estimated Ballpark Investment</div>
+            <div style="font-size: 11px; color: #718096; margin-top: 2px;">Subject to definitive milestone charter execution</div>
+          </div>
+          <div class="total-val">${currSym}${priceVal}</div>
+        </div>
+
+        <div class="credentials-bar">
+          <div><strong>UDYAM Registration:</strong><br>UDYAM-RJ-17-0402246</div>
+          <div><strong>Government Portal Status:</strong><br>Verified Active Micro (Services)</div>
+          <div><strong>Direct Advisory Hotline:</strong><br>+91 87640 41596 (WhatsApp/Call)</div>
+        </div>
+
+        <div class="sign-area">
+          <div class="seal-box">
+            <span>KCS</span>
+            <span>VERIFIED</span>
+            <span>2026</span>
+          </div>
+          <div class="sign-line">
+            <div class="sign-name">Abhishek Sharma</div>
+            <div class="sign-role">Proprietor & Principal Consultant<br>Kothotya Consultancy Services</div>
+          </div>
+        </div>
+
+        <script>
+          window.onload = function() {
+            window.print();
+          };
+        <\/script>
+      </body>
+      </html>
+    `;
+
+    const printWin = window.open('', '_blank', 'width=880,height=900');
+    if (printWin) {
+      printWin.document.open();
+      printWin.document.write(printContent);
+      printWin.document.close();
+      showToast('Proposal quotation generated for printing/saving as PDF');
+    } else {
+      const frame = document.createElement('iframe');
+      frame.style.position = 'fixed';
+      frame.style.right = '0';
+      frame.style.bottom = '0';
+      frame.style.width = '0';
+      frame.style.height = '0';
+      frame.style.border = 'none';
+      document.body.appendChild(frame);
+      frame.contentWindow.document.open();
+      frame.contentWindow.document.write(printContent);
+      frame.contentWindow.document.close();
+      setTimeout(() => {
+        frame.contentWindow.print();
+        setTimeout(() => document.body.removeChild(frame), 3000);
+      }, 500);
+      showToast('Proposal quotation prepared for print/PDF');
+    }
+  });
+}
+
+/* -------------------------------------------------------------------
+   15. 32+ NIC GOVERNMENT INDUSTRY DIRECTORY MODAL
+   ------------------------------------------------------------------- */
+function initNicDirectoryModal() {
+  const modalBackdrop = document.getElementById('nic-modal-backdrop');
+  const triggerBtn = document.getElementById('btn-explore-nic');
+  const statTrigger = document.getElementById('stat-nic-trigger');
+  const closeBtn = document.getElementById('nic-modal-close');
+  const listContainer = document.getElementById('nic-sectors-list');
+  const searchInput = document.getElementById('nic-search-input');
+  const catBtns = document.querySelectorAll('.nic-cat-btn');
+  const toEstBtn = document.getElementById('btn-nic-to-estimator');
+
+  if (!modalBackdrop || !listContainer) return;
+
+  const NIC_SECTORS = [
+    { code: '62011', classCode: '6201', cat: 'tech', catLabel: 'IT & Cloud', title: 'Writing, modifying, testing of custom computer programming', desc: 'Custom enterprise software, API backends, web applications, and database engines tailored to client architecture.' },
+    { code: '62012', classCode: '6201', cat: 'tech', catLabel: 'IT & Cloud', title: 'Web-page designing and website hosting activities', desc: 'Modern responsive web applications, progressive web portals, cloud CDN deployment, and UI/UX engineering.' },
+    { code: '62020', classCode: '6202', cat: 'tech', catLabel: 'IT & Cloud', title: 'Computer consultancy and facilities management', desc: 'Cloud infrastructure topology, system redundancy, cybersecurity audit, and IT governance consulting.' },
+    { code: '62099', classCode: '6209', cat: 'tech', catLabel: 'IT & Cloud', title: 'Other information technology service activities n.e.c.', desc: 'Disaster recovery automation, server scripting, network load-balancing, and software maintenance.' },
+    { code: '63111', classCode: '6311', cat: 'tech', catLabel: 'IT & Cloud', title: 'Data processing activities & specialized report generation', desc: 'Big data processing, automated data pipelines, statutory reconciliation algorithms, and ETL workloads.' },
+    { code: '63112', classCode: '6311', cat: 'tech', catLabel: 'IT & Cloud', title: 'Web hosting and cloud server activities', desc: 'Cloud hosting, VPS administration, high-availability clusters, SSL management, and uptime engineering.' },
+    { code: '63120', classCode: '6312', cat: 'tech', catLabel: 'IT & Cloud', title: 'Web portals and enterprise search operations', desc: 'Enterprise knowledge bases, directory engines, search portals, and corporate intranets.' },
+    { code: '63999', classCode: '6399', cat: 'tech', catLabel: 'IT & Cloud', title: 'Other information service activities n.e.c.', desc: 'Information aggregation, automated compliance monitoring feeds, and digital document distribution.' },
+    { code: '69201', classCode: '6920', cat: 'tax', catLabel: 'Tax & Accounting', title: 'Accounting, bookkeeping and statutory auditing activities', desc: 'Corporate bookkeeping, financial statement auditing, statutory accounts preparation, and ROC filing.' },
+    { code: '69202', classCode: '6920', cat: 'tax', catLabel: 'Tax & Accounting', title: 'Tax consultancy and statutory tax return preparation', desc: 'GST filing, Input Tax Credit (ITC) reconciliation, Income Tax filings, TDS management, and tax optimization.' },
+    { code: '69203', classCode: '6920', cat: 'tax', catLabel: 'Tax & Accounting', title: 'Insolvency, restructuring and receivership advisory', desc: 'Debt settlement advisory, financial reconstruction, turnaround strategy, and liquidator compliance.' },
+    { code: '69100', classCode: '6910', cat: 'legal', catLabel: 'Legal & Governance', title: 'Legal advisory, documentation and statutory representation', desc: 'Drafting commercial contracts, SLAs, terms of service, NDAs, and corporate statutory documentation.' },
+    { code: '70200', classCode: '7020', cat: 'mgmt', catLabel: 'Management', title: 'Management consultancy and strategic business advisory', desc: 'End-to-end enterprise structuring, financial advisory, organizational restructuring, and operational excellence.' },
+    { code: '71100', classCode: '7110', cat: 'tech', catLabel: 'IT & Engineering', title: 'Engineering and technical consultancy activities', desc: 'Systems engineering, technology topology review, software lifecycle architecture, and technical audits.' },
+    { code: '71200', classCode: '7120', cat: 'tech', catLabel: 'IT & Engineering', title: 'Technical testing, code analysis and verification', desc: 'Software QA automation, load testing, penetration testing, and code quality verification.' },
+    { code: '72200', classCode: '7220', cat: 'mgmt', catLabel: 'Management', title: 'Research & experimental development on social sciences', desc: 'Market economics research, behavioral compliance modeling, and policy impact analysis.' },
+    { code: '73100', classCode: '7310', cat: 'mgmt', catLabel: 'Management', title: 'Advertising, digital branding and media communication', desc: 'Corporate brand positioning, digital acquisition funnel design, and enterprise communications.' },
+    { code: '73200', classCode: '7320', cat: 'mgmt', catLabel: 'Management', title: 'Market research and commercial opinion polling', desc: 'Customer segmentation, competitor benchmarking, feasibility studies, and regulatory sentiment surveys.' },
+    { code: '74100', classCode: '7410', cat: 'tech', catLabel: 'Design & UI/UX', title: 'Specialized design activities (UI/UX, visual identity)', desc: 'Enterprise design systems, interactive prototypes, design systems, and digital asset production.' },
+    { code: '74909', classCode: '7490', cat: 'mgmt', catLabel: 'Technical Advisory', title: 'Other professional, scientific and technical activities n.e.c.', desc: 'Single-window technical liaison, multi-disciplinary statutory audit, and specialized technical appraisals.' },
+    { code: '77400', classCode: '7740', cat: 'legal', catLabel: 'Legal & IP', title: 'Licensing of intellectual property and proprietary products', desc: 'Software licensing agreements, patent/trademark exploitation advisory, and IP commercialization.' },
+    { code: '78100', classCode: '7810', cat: 'mgmt', catLabel: 'Human Capital', title: 'Activities of employment placement agencies', desc: 'Executive talent acquisition, specialized engineering recruitment, and leadership staffing advisory.' },
+    { code: '78200', classCode: '7820', cat: 'mgmt', catLabel: 'Human Capital', title: 'Temporary employment and engineering staffing activities', desc: 'Interim CTO/CFO support, project-based engineering augmentation, and contract compliance staff.' },
+    { code: '78300', classCode: '7830', cat: 'mgmt', catLabel: 'Human Capital', title: 'Other human resources provision & corporate HR compliance', desc: 'HR policy drafting, POSH compliance, labor statutory filings, and payroll governance.' },
+    { code: '82110', classCode: '8211', cat: 'mgmt', catLabel: 'Office Support', title: 'Combined office administrative service activities', desc: 'Virtual registered office administration, corporate secretarial coordination, and statutory mail handling.' },
+    { code: '82191', classCode: '8219', cat: 'mgmt', catLabel: 'Office Support', title: 'Document preparation and specialized secretarial support', desc: 'Tender dossier preparation, board resolution drafting, compliance dossier collation, and affidavit drafting.' },
+    { code: '82200', classCode: '8220', cat: 'mgmt', catLabel: 'Client Ops', title: 'Activities of call centres and client advisory desks', desc: 'Dedicated client support desks, tier-1 technical support, and inbound statutory helpdesks.' },
+    { code: '82300', classCode: '8230', cat: 'mgmt', catLabel: 'Corporate Events', title: 'Organization of conventions and trade shows', desc: 'Corporate seminars, investor roadshows, industry symposiums, and statutory compliance workshops.' },
+    { code: '82990', classCode: '8299', cat: 'mgmt', catLabel: 'Enterprise Support', title: 'Other business support service activities n.e.c.', desc: 'Government portal liaisons, statutory certification processing, and enterprise vendor verification.' },
+    { code: '85499', classCode: '8549', cat: 'mgmt', catLabel: 'Education', title: 'Other education n.e.c. (Executive training & workshops)', desc: 'Executive training in tax governance, corporate law amendments, and cloud engineering best practices.' },
+    { code: '95111', classCode: '9511', cat: 'tech', catLabel: 'Hardware & IT', title: 'Repair and maintenance of computers and peripheral equipment', desc: 'Hardware diagnostics, workstation maintenance, server rack setup, and office IT support.' },
+    { code: '96099', classCode: '9609', cat: 'mgmt', catLabel: 'Concierge', title: 'Other personal and business service activities n.e.c.', desc: 'High-touch strategic concierge, proprietor executive liaison, and specialized turnkey advisory.' }
+  ];
+
+  let currentCategory = 'all';
+  let searchQuery = '';
+
+  function renderSectors() {
+    listContainer.innerHTML = '';
+    const filtered = NIC_SECTORS.filter(s => {
+      const matchCat = currentCategory === 'all' || s.cat === currentCategory;
+      const q = searchQuery.toLowerCase();
+      const matchSearch = !q || s.code.includes(q) || s.classCode.includes(q) || s.title.toLowerCase().includes(q) || s.desc.toLowerCase().includes(q) || s.catLabel.toLowerCase().includes(q);
+      return matchCat && matchSearch;
+    });
+
+    if (filtered.length === 0) {
+      listContainer.innerHTML = `
+        <div style="grid-column: 1 / -1; text-align: center; padding: 40px 20px; color: var(--text-dim);">
+          <i class="ph ph-magnifying-glass" style="font-size: 2rem; color: var(--gold-primary); margin-bottom: 10px;"></i>
+          <p>No matching NIC sectors found for "<strong>${searchQuery}</strong>".</p>
+        </div>
+      `;
+      return;
+    }
+
+    filtered.forEach(s => {
+      const card = document.createElement('div');
+      card.className = 'nic-sector-card';
+      card.innerHTML = `
+        <div class="nic-sector-top">
+          <span class="nic-code-badge">NIC ${s.code}</span>
+          <span class="nic-cat-pill">${s.catLabel}</span>
+        </div>
+        <div class="nic-sector-title">${s.title}</div>
+        <div class="nic-sector-desc">${s.desc}</div>
+      `;
+      listContainer.appendChild(card);
+    });
+  }
+
+  function openModal() {
+    playLuxeSound('modal');
+    modalBackdrop.classList.add('active');
+    modalBackdrop.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    renderSectors();
+  }
+
+  function closeModal() {
+    playLuxeSound('micro');
+    modalBackdrop.classList.remove('active');
+    modalBackdrop.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  if (triggerBtn) triggerBtn.addEventListener('click', openModal);
+  if (statTrigger) statTrigger.addEventListener('click', openModal);
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+  modalBackdrop.addEventListener('click', (e) => {
+    if (e.target === modalBackdrop) closeModal();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modalBackdrop.classList.contains('active')) {
+      closeModal();
+    }
+  });
+
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      searchQuery = e.target.value.trim();
+      renderSectors();
+    });
+  }
+
+  catBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      playLuxeSound('select');
+      catBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentCategory = btn.getAttribute('data-cat') || 'all';
+      renderSectors();
+    });
+  });
+
+  if (toEstBtn) {
+    toEstBtn.addEventListener('click', () => {
+      closeModal();
+    });
+  }
+}
+
+/* -------------------------------------------------------------------
+   16. STRATEGIC DISCOVERY CALL BOOKING MODAL
+   ------------------------------------------------------------------- */
+function initDiscoveryBookingModal() {
+  const modalBackdrop = document.getElementById('booking-modal-backdrop');
+  const triggerBtn = document.getElementById('btn-open-booking-modal');
+  const closeBtn = document.getElementById('booking-modal-close');
+  const confirmBtn = document.getElementById('btn-confirm-booking');
+
+  if (!modalBackdrop || !triggerBtn) return;
+
+  function bindPillGroup(containerId) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    const pills = container.querySelectorAll('.booking-pill');
+    pills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        playLuxeSound('select');
+        pills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+      });
+    });
+  }
+
+  bindPillGroup('booking-practice-pills');
+  bindPillGroup('booking-day-pills');
+  bindPillGroup('booking-channel-pills');
+
+  function openModal() {
+    playLuxeSound('modal');
+    modalBackdrop.classList.add('active');
+    modalBackdrop.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    playLuxeSound('micro');
+    modalBackdrop.classList.remove('active');
+    modalBackdrop.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  triggerBtn.addEventListener('click', openModal);
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+  modalBackdrop.addEventListener('click', (e) => {
+    if (e.target === modalBackdrop) closeModal();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modalBackdrop.classList.contains('active')) {
+      closeModal();
+    }
+  });
+
+  if (confirmBtn) {
+    confirmBtn.addEventListener('click', () => {
+      playLuxeSound('select');
+      const practice = document.querySelector('#booking-practice-pills .booking-pill.active')?.getAttribute('data-val') || 'Multi-Discipline Advisory';
+      const timeSlot = document.querySelector('#booking-day-pills .booking-pill.active')?.getAttribute('data-val') || 'Tomorrow Morning';
+      const channel = document.querySelector('#booking-channel-pills .booking-pill.active')?.getAttribute('data-val') || 'Google Meet';
+      const clientName = document.getElementById('booking-client-name')?.value.trim() || 'Client / Organization';
+
+      const msg = encodeURIComponent(
+        `Hola Abhishek Sharma ^_^\n\nI would like to schedule a 15-Minute Strategic Discovery Session:\n• Client: ${clientName}\n• Practice Vertical: ${practice}\n• Preferred Slot: ${timeSlot}\n• Communication Mode: ${channel}\n\nPlease confirm availability and meeting link.`
+      );
+
+      closeModal();
+      window.open(`https://wa.me/918764041596?text=${msg}`, '_blank');
+      showToast('Redirecting to WhatsApp to schedule your session...');
+    });
+  }
+}
+
+/* -------------------------------------------------------------------
+   17. WHATSAPP QUICK-MENU FLOATING CARD
+   ------------------------------------------------------------------- */
+function initWhatsAppQuickMenu() {
+  const container = document.getElementById('whatsapp-container');
+  const toggleBtn = document.getElementById('btn-toggle-wa-menu');
+  const card = document.getElementById('whatsapp-quick-card');
+  const closeBtn = document.getElementById('wa-card-close');
+
+  if (!container || !toggleBtn || !card) return;
+
+  function toggleMenu(e) {
+    e.stopPropagation();
+    const isActive = card.classList.contains('active');
+    if (isActive) {
+      card.classList.remove('active');
+      card.setAttribute('aria-hidden', 'true');
+      playLuxeSound('micro');
+    } else {
+      card.classList.add('active');
+      card.setAttribute('aria-hidden', 'false');
+      playLuxeSound('select');
+    }
+  }
+
+  toggleBtn.addEventListener('click', toggleMenu);
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      card.classList.remove('active');
+      card.setAttribute('aria-hidden', 'true');
+      playLuxeSound('micro');
+    });
+  }
+
+  document.addEventListener('click', (e) => {
+    if (!container.contains(e.target)) {
+      if (card.classList.contains('active')) {
+        card.classList.remove('active');
+        card.setAttribute('aria-hidden', 'true');
+      }
+    }
+  });
+}
+
+/* -------------------------------------------------------------------
+   18. PROGRESSIVE WEB APP (PWA) SERVICE WORKER
+   ------------------------------------------------------------------- */
+function initPwaServiceWorker() {
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js')
+        .then(reg => {
+          console.log('KCS PWA ServiceWorker active:', reg.scope);
+        })
+        .catch(err => {
+          console.warn('KCS PWA ServiceWorker error:', err);
+        });
+    });
   }
 }
