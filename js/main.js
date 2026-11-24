@@ -2002,7 +2002,7 @@ function initDiscoveryBookingModal() {
       const clientName = document.getElementById('booking-client-name')?.value.trim() || 'Client / Organization';
 
       const msg = encodeURIComponent(
-        `Hola Abhishek Sharma ^_^\n\nI would like to schedule a 15-Minute Strategic Discovery Session:\n• Client: ${clientName}\n• Practice Vertical: ${practice}\n• Preferred Slot: ${timeSlot}\n• Communication Mode: ${channel}\n\nPlease confirm availability and meeting link.`
+        `Hola KCS Team ^_^\n\nI would like to schedule a 15-Minute Strategic Discovery Session:\n• Client: ${clientName}\n• Practice Vertical: ${practice}\n• Preferred Slot: ${timeSlot}\n• Communication Mode: ${channel}\n\nPlease confirm availability and meeting link.`
       );
 
       closeModal();
