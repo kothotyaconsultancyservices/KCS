@@ -981,13 +981,18 @@ function initCopyCredentials() {
   });
 }
 
-function showToast(msg, isError = false) {
+let toastTimeoutId = null;
+function showToast(msg, isError = false, customIcon = null) {
   const toast = document.getElementById('toast-notice');
   if (!toast) return;
 
   const icon = toast.querySelector('i');
   if (icon) {
-    if (isError) {
+    if (customIcon) {
+      icon.className = customIcon.name;
+      icon.style.color = customIcon.color || 'var(--gold-primary)';
+      toast.classList.remove('toast-error');
+    } else if (isError) {
       icon.className = 'ph ph-warning-circle';
       icon.style.color = '#f43f5e';
       toast.classList.add('toast-error');
@@ -998,11 +1003,15 @@ function showToast(msg, isError = false) {
     }
   }
 
-  toast.querySelector('.toast-text').textContent = msg;
+  const textEl = toast.querySelector('.toast-text');
+  if (textEl) textEl.textContent = msg;
+
   toast.classList.add('show');
-  setTimeout(() => {
+
+  if (toastTimeoutId) clearTimeout(toastTimeoutId);
+  toastTimeoutId = setTimeout(() => {
     toast.classList.remove('show');
-  }, 3800);
+  }, 3200);
 }
 
 /* -------------------------------------------------------------------
@@ -1035,14 +1044,14 @@ function initAudioVibe() {
         icon.classList.add('ph-speaker-high');
       }
       playLuxeChime(audioCtx);
-      showToast('Ambient Acoustic Aura Enabled');
+      showToast('Ambient Acoustic Aura Enabled', false, { name: 'ph ph-speaker-high', color: '#ffd700' });
     } else {
       soundBtn.classList.remove('active');
       if (icon) {
         icon.classList.add('ph-speaker-slash');
         icon.classList.remove('ph-speaker-high');
       }
-      showToast('Acoustic Feedback Muted');
+      showToast('Acoustic Feedback Muted', false, { name: 'ph ph-speaker-slash', color: '#9ca3af' });
     }
   });
 

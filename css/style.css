@@ -2020,28 +2020,55 @@ body {
 /* Toast Notification */
 .toast-notice {
   position: fixed;
-  bottom: 30px;
+  bottom: 28px;
   left: 50%;
-  transform: translateX(-50%) translateY(100px);
-  background: rgba(10, 24, 18, 0.95);
-  border: 1px solid var(--gold-primary);
+  right: auto;
+  transform: translateX(-50%) translateY(50px);
+  background: rgba(6, 18, 13, 0.96);
+  border: 1.5px solid var(--gold-primary);
   color: #fff;
-  padding: 12px 24px;
+  padding: 11px 22px;
   border-radius: var(--border-radius-full);
-  font-size: 0.9rem;
-  font-weight: 500;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+  font-size: 0.88rem;
+  font-weight: 600;
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.9), 0 0 30px rgba(212, 175, 55, 0.28);
+  backdrop-filter: blur(25px);
   opacity: 0;
-  transition: all 0.3s ease;
-  z-index: 10000;
-  display: flex;
+  visibility: hidden;
+  pointer-events: none;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 100000;
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
+  width: max-content;
+  max-width: calc(100vw - 32px);
+  box-sizing: border-box;
+  text-align: center;
+  white-space: nowrap;
 }
 
 .toast-notice.show {
   transform: translateX(-50%) translateY(0);
   opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.toast-notice i {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toast-notice .toast-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  letter-spacing: 0.01em;
 }
 
 /* ===================================================================
@@ -2575,11 +2602,17 @@ body {
     font-size: 1.35rem;
   }
   .toast-notice {
-    left: 12px;
-    right: 12px;
-    max-width: calc(100% - 24px);
-    font-size: 0.82rem;
-    bottom: 80px;
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%) translateY(40px) !important;
+    max-width: calc(100vw - 32px);
+    width: max-content;
+    padding: 10px 18px;
+    font-size: 0.84rem;
+    bottom: 82px;
+  }
+  .toast-notice.show {
+    transform: translateX(-50%) translateY(0) !important;
   }
 
   /* Certificate Modal */
@@ -2811,6 +2844,16 @@ body {
   .footer-legal-bar .legal-sep {
     display: none;
   }
+  .toast-notice {
+    max-width: calc(100vw - 24px);
+    padding: 9px 15px;
+    font-size: 0.8rem;
+    bottom: 78px;
+    gap: 8px;
+  }
+  .toast-notice i {
+    font-size: 1.15rem;
+  }
 }
 
 /* 5. Ultra-Compact Phones & Fold Outer Screens (max-width: 360px) */
@@ -2873,6 +2916,19 @@ body {
   }
   .cert-modal-window {
     padding: 18px 10px;
+  }
+  .toast-notice {
+    max-width: calc(100vw - 16px);
+    padding: 8px 12px;
+    font-size: 0.74rem;
+    bottom: 72px;
+    gap: 6px;
+  }
+  .toast-notice i {
+    font-size: 1rem;
+  }
+  .toast-notice .toast-text {
+    font-size: 0.74rem;
   }
 }
 
