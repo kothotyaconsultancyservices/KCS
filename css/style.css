@@ -109,7 +109,7 @@ body {
   transition: transform 0.12s ease-out, border-color 0.2s ease;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 975px) {
   .custom-cursor, .custom-cursor-follower {
     display: none;
   }
@@ -2277,29 +2277,33 @@ body {
    COMPREHENSIVE MULTI-DEVICE RESPONSIVENESS (PHONES, TABLETS, LAPTOPS & PC)
    =================================================================== */
 
-/* 1. Laptops & Small Desktops (max-width: 1200px) */
+/* 1. Laptops, Small Desktops & Mobile Desktop-Mode (max-width: 1200px) */
 @media (max-width: 1200px) {
   .hero-section {
     padding: 120px 24px 70px;
   }
   .hero-title {
-    font-size: 3rem;
+    font-size: 2.85rem;
+  }
+  .nav-link {
+    padding: 8px 12px;
+    font-size: 0.86rem;
   }
   .services-grid {
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 22px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
   }
   .roadmap-timeline {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
   }
-  .roadmap-timeline::before {
-    display: none;
+  .roadmap-step {
+    padding: 24px 16px;
   }
 }
 
-/* 2. Tablets, iPads & Netbooks (max-width: 1024px) */
-@media (max-width: 1024px) {
+/* 2. Tablets, iPads & Mobile Portrait (max-width: 975px) */
+@media (max-width: 975px) {
   /* Navbar & Luxury Drawer Activation for Tablets */
   .navbar {
     padding: 12px 0;
@@ -3245,7 +3249,7 @@ body {
   opacity: 0.5;
 }
 
-@media (max-width: 992px) {
+@media (max-width: 975px) {
   .roadmap-timeline {
     grid-template-columns: 1fr;
     gap: 30px;
