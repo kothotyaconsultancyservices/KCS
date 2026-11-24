@@ -1532,7 +1532,27 @@ body {
   border-color: var(--gold-primary);
   color: #fff;
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35), 0 0 14px rgba(212, 175, 55, 0.25);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35), 0 0 16px rgba(212, 175, 55, 0.35);
+  animation: proposalGlow 2.2s infinite ease-in-out;
+}
+
+.btn-download-proposal:hover i {
+  transform: scale(1.15) rotate(-6deg);
+  color: #ffd700;
+}
+
+.btn-download-proposal i {
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+
+@keyframes proposalGlow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 24px rgba(212, 175, 55, 0.5), 0 0 10px rgba(16, 185, 129, 0.35);
+    border-color: #ffd700;
+  }
 }
 
 .btn-download-proposal:active {
@@ -3925,22 +3945,36 @@ body {
   content: '';
   position: absolute;
   top: 0;
-  left: 0;
+  left: -100%;
   width: 100%;
   height: 3px;
-  background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
-  opacity: 0.5;
-  transition: opacity 0.3s ease;
+  background: linear-gradient(90deg, transparent, var(--gold-primary), #10b981, transparent);
+  animation: caseBorderBeam 4.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes caseBorderBeam {
+  0% {
+    left: -100%;
+  }
+  50%, 100% {
+    left: 100%;
+  }
 }
 
 .case-card:hover {
-  transform: translateY(-6px);
-  border-color: rgba(212, 175, 55, 0.6);
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55), 0 0 25px rgba(212, 175, 55, 0.22);
+  transform: translateY(-8px);
+  border-color: rgba(212, 175, 55, 0.7);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.65), 0 0 30px rgba(212, 175, 55, 0.25);
 }
 
-.case-card:hover::before {
-  opacity: 1;
+.case-card:hover .metric-val {
+  transform: scale(1.08);
+  color: #ffd700;
+  text-shadow: 0 0 16px rgba(255, 215, 0, 0.65);
+}
+
+.case-card .metric-val {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .case-card-header {
@@ -4085,9 +4119,9 @@ body {
   overflow: hidden;
   opacity: 0;
   pointer-events: none;
-  transform: translateY(15px) scale(0.96);
+  transform: translateY(18px) scale(0.92);
   transform-origin: bottom right;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .whatsapp-quick-card.active {
@@ -4095,6 +4129,27 @@ body {
   pointer-events: auto;
   transform: translateY(0) scale(1);
 }
+
+@keyframes waOptionSlide {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.whatsapp-quick-card.active .wa-quick-option {
+  animation: waOptionSlide 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.whatsapp-quick-card.active .wa-quick-option:nth-child(1) { animation-delay: 0.04s; }
+.whatsapp-quick-card.active .wa-quick-option:nth-child(2) { animation-delay: 0.08s; }
+.whatsapp-quick-card.active .wa-quick-option:nth-child(3) { animation-delay: 0.12s; }
+.whatsapp-quick-card.active .wa-quick-option:nth-child(4) { animation-delay: 0.16s; }
+.whatsapp-quick-card.active .wa-quick-option:nth-child(5) { animation-delay: 0.20s; }
 
 .wa-card-header {
   background: linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(6, 18, 13, 0.9));
@@ -4497,36 +4552,100 @@ body {
   box-shadow: 0 0 14px rgba(212, 175, 55, 0.25);
 }
 
-/* Responsive Overrides */
+/* ===================================================================
+   RESPONSIVE OVERRIDES & MOBILE OPTIMIZATIONS FOR ALL NEW FEATURES
+   =================================================================== */
 @media (max-width: 975px) {
   .case-studies-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 20px;
   }
   .nic-sectors-container {
     grid-template-columns: 1fr;
+    max-height: 52vh;
   }
   .whatsapp-quick-card {
-    width: 310px;
-    right: -10px;
+    width: 320px;
+    right: -8px;
+  }
+}
+
+@media (max-width: 640px) {
+  .case-studies-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .case-card {
+    padding: 24px 18px;
+  }
+  .nic-modal-window {
+    width: 95vw;
+    padding: 22px 14px;
+    max-height: 90vh;
+  }
+  .booking-modal-window {
+    width: 95vw;
+    padding: 22px 14px;
+  }
+  .booking-pills {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+  .booking-pill {
+    width: 100%;
+    justify-content: center;
+    padding: 9px 8px;
+    font-size: 0.78rem;
   }
 }
 
 @media (max-width: 480px) {
   .floating-whatsapp-container {
     bottom: 20px;
-    right: 18px;
+    right: 16px;
   }
   .whatsapp-quick-card {
-    width: calc(100vw - 36px);
+    width: calc(100vw - 32px);
     right: -6px;
-    bottom: 68px;
+    bottom: 72px;
+  }
+  .wa-quick-option {
+    padding: 8px 10px;
+    gap: 10px;
+  }
+  .wa-opt-text strong {
+    font-size: 0.8rem;
+  }
+  .wa-opt-text span {
+    font-size: 0.68rem;
   }
   .booking-pills {
-    flex-direction: column;
+    grid-template-columns: 1fr;
   }
-  .booking-pill {
-    width: 100%;
-    justify-content: center;
+  .case-metrics-row {
+    padding: 8px 4px;
+    gap: 4px;
+  }
+  .metric-val {
+    font-size: 1rem;
+  }
+  .metric-label {
+    font-size: 0.6rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .floating-whatsapp-container {
+    right: 12px;
+    bottom: 16px;
+  }
+  .whatsapp-quick-card {
+    width: calc(100vw - 24px);
+    right: -4px;
+  }
+  .case-metrics-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
   }
 }

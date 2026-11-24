@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initDiscoveryBookingModal();
   initWhatsAppQuickMenu();
   initPwaServiceWorker();
+  initCaseStudiesInteractive();
 });
 
 /* -------------------------------------------------------------------
@@ -1216,6 +1217,37 @@ function playLuxeSound(type) {
       gain.connect(ctx.destination);
       osc.start(now);
       osc.stop(now + 0.13);
+
+    } else if (type === 'luxeChime') {
+      // Ascending diamond triad for proposal generation & confirmed booking
+      [523.25, 659.25, 783.99, 1046.50].forEach((freq, i) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, now + i * 0.07);
+        gain.gain.setValueAtTime(0, now + i * 0.07);
+        gain.gain.linearRampToValueAtTime(0.045, now + i * 0.07 + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + i * 0.07 + 0.7);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now + i * 0.07);
+        osc.stop(now + i * 0.07 + 0.75);
+      });
+
+    } else if (type === 'pop') {
+      // Soft gentle bubble popup note for WhatsApp menu
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(440.00, now); // A4
+      osc.frequency.exponentialRampToValueAtTime(880.00, now + 0.06); // A5
+      gain.gain.setValueAtTime(0, now);
+      gain.gain.linearRampToValueAtTime(0.04, now + 0.015);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.16);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.18);
     }
   } catch (_) {}
 }
@@ -1604,8 +1636,10 @@ function initProposalPdfDownload() {
   const btn = document.getElementById('btn-download-proposal');
   if (!btn) return;
 
+  btn.addEventListener('mouseenter', () => playLuxeSound('micro'));
+
   btn.addEventListener('click', () => {
-    playLuxeSound('select');
+    playLuxeSound('luxeChime');
 
     const domainInput = document.querySelector('input[name="est-domain"]:checked');
     const scaleInput = document.querySelector('input[name="est-scale"]:checked');
@@ -1674,7 +1708,7 @@ function initProposalPdfDownload() {
             <div class="firm-tag">Technology • Statutory Taxation • Corporate Law • Advisory</div>
             <div class="firm-address">
               Building No. 38, Floor 1, Kothotya Market, Kunthada Road, Nayla Kanota Road, Kanota, Jaipur, Rajasthan - 303012<br>
-              Proprietor: Abhishek Sharma | Email: kothotya.consultancy.services@gmail.com | Phone: +91 87640 41596
+              KCS Team • Enterprise Advisory | Email: kothotya.consultancy.services@gmail.com | Phone: +91 87640 41596
             </div>
           </div>
           <div class="quote-meta">
@@ -1741,8 +1775,8 @@ function initProposalPdfDownload() {
             <span>2026</span>
           </div>
           <div class="sign-line">
-            <div class="sign-name">Abhishek Sharma</div>
-            <div class="sign-role">Proprietor & Principal Consultant<br>Kothotya Consultancy Services</div>
+            <div class="sign-name">KCS Advisory Team</div>
+            <div class="sign-role">Authorized Practice Leadership<br>Kothotya Consultancy Services</div>
           </div>
         </div>
 
@@ -1865,6 +1899,7 @@ function initNicDirectoryModal() {
         <div class="nic-sector-title">${s.title}</div>
         <div class="nic-sector-desc">${s.desc}</div>
       `;
+      card.addEventListener('mouseenter', () => playLuxeSound('micro'));
       listContainer.appendChild(card);
     });
   }
@@ -1916,6 +1951,7 @@ function initNicDirectoryModal() {
 
   if (searchInput) {
     searchInput.addEventListener('input', (e) => {
+      playLuxeSound('micro');
       searchQuery = e.target.value.trim();
       renderSectors();
     });
@@ -1933,6 +1969,7 @@ function initNicDirectoryModal() {
 
   if (toEstBtn) {
     toEstBtn.addEventListener('click', () => {
+      playLuxeSound('select');
       closeModal();
     });
   }
@@ -1994,8 +2031,9 @@ function initDiscoveryBookingModal() {
   });
 
   if (confirmBtn) {
+    confirmBtn.addEventListener('mouseenter', () => playLuxeSound('micro'));
     confirmBtn.addEventListener('click', () => {
-      playLuxeSound('select');
+      playLuxeSound('luxeChime');
       const practice = document.querySelector('#booking-practice-pills .booking-pill.active')?.getAttribute('data-val') || 'Multi-Discipline Advisory';
       const timeSlot = document.querySelector('#booking-day-pills .booking-pill.active')?.getAttribute('data-val') || 'Tomorrow Morning';
       const channel = document.querySelector('#booking-channel-pills .booking-pill.active')?.getAttribute('data-val') || 'Google Meet';
@@ -2033,7 +2071,7 @@ function initWhatsAppQuickMenu() {
     } else {
       card.classList.add('active');
       card.setAttribute('aria-hidden', 'false');
-      playLuxeSound('select');
+      playLuxeSound('pop');
     }
   }
 
@@ -2047,6 +2085,12 @@ function initWhatsAppQuickMenu() {
       playLuxeSound('micro');
     });
   }
+
+  const quickOptions = card.querySelectorAll('.wa-quick-option, .wa-direct-chat-btn');
+  quickOptions.forEach(opt => {
+    opt.addEventListener('mouseenter', () => playLuxeSound('micro'));
+    opt.addEventListener('click', () => playLuxeSound('select'));
+  });
 
   document.addEventListener('click', (e) => {
     if (!container.contains(e.target)) {
@@ -2073,4 +2117,22 @@ function initPwaServiceWorker() {
         });
     });
   }
+}
+
+/* -------------------------------------------------------------------
+   19. CASE STUDIES INTERACTIVE HOVER & AUDIO FEEDBACK
+   ------------------------------------------------------------------- */
+function initCaseStudiesInteractive() {
+  const caseCards = document.querySelectorAll('.case-card');
+  caseCards.forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      playLuxeSound('micro');
+    });
+    const link = card.querySelector('.case-action-link');
+    if (link) {
+      link.addEventListener('click', () => {
+        playLuxeSound('select');
+      });
+    }
+  });
 }
